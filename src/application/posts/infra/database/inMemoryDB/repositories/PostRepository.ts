@@ -1,4 +1,4 @@
-import { IPost } from "../../../../domain/entities/Post";
+import { IPost } from "../../../../domain/models/Post"
 import { PostRepository } from "../../../../domain/repositories/PostRepository";
 
 export class InMemoryPostRepository implements PostRepository {

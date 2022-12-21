@@ -1,10 +1,9 @@
-import { toSnakeCase } from "../../../../shared/utils/toSnakeCase";
 import { CreatePostDto } from "../dtos/CreatePost.dto";
-import { IPost } from "../entities/Post";
+import { Post } from "../models/Post";
 import { PostRepository } from "../repositories/PostRepository";
 
 type CreatePostResponse = {
-    post: IPost
+    post: Post
 }
 
 export class CreatePostService {
@@ -15,15 +14,11 @@ export class CreatePostService {
 
         const { title, subtitle, content, categories } = createPostDto
 
-        const post = await this.postRepository.create({
-            slug: toSnakeCase(title),
-            title,
-            subtitle,
-            content,
-            categories,
-            createdAt: new Date(),
-            updatedAt: new Date()
+        const post = new Post({
+            title, subtitle, content, categories
         })
+        
+        await this.postRepository.create(post.props)
 
         return { post }
     }
