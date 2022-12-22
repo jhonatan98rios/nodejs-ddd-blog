@@ -1,18 +1,24 @@
+import 'express-async-errors';
 import express, { Express } from 'express'
 import { useAppError } from '../middlewares/useAppError'
 import cors from 'cors';
 import routes from '../routes';
+import Database from '../../database/MongoDB/connection';
+
 
 export class Server {
 
     app: Express
 
-    constructor() {
+    constructor(database: Database) {
+
         this.app = express()
         this.app.use(cors())
         this.app.use(express.json());
         this.app.use(routes)
         this.app.use(useAppError)
+        
+        database.connect()
     }
 
     public listen(port: number) {

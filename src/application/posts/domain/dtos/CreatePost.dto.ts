@@ -3,4 +3,5 @@ export interface CreatePostDto {
     subtitle: string
     content: string
     categories: string[]
+    createdAt?: Date
 }

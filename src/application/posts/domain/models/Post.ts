@@ -1,11 +1,5 @@
 import { toSnakeCase } from "../../../../shared/utils/toSnakeCase"
-
-interface IPostProps {
-    title: string
-    subtitle: string
-    content: string
-    categories: string[]
-}
+import { CreatePostDto } from "../dtos/CreatePost.dto"
 
 export interface IPost {
     slug: string
@@ -20,11 +14,11 @@ export interface IPost {
 export class Post {
     props: IPost
 
-    constructor(props: IPostProps) {
+    constructor(props: CreatePostDto) {
         this.props = {
             ...props,
             slug: toSnakeCase(props.title),
-            createdAt: new Date(),
+            createdAt: props.createdAt ?? new Date(),
             updatedAt: new Date(),
         }
     }
