@@ -28,7 +28,8 @@ export class InMemoryPostRepository implements AbstractPostRepository {
         return this.posts[findIndex]
     }
 
-    async delete(slug: string): Promise<void> {
+    async delete(slug: string): Promise<string> {
         this.posts.filter(post => post.slug != slug)
+        return slug
     }
 }

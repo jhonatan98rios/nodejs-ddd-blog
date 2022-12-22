@@ -57,7 +57,7 @@ export class PostController {
         const { slug } = request.params
         const postRepository = new MongoDBPostRepository()
         const readOnePostService = new DeletePostService(postRepository)
-        readOnePostService.execute(slug)
-        return response.status(204).send()
+        const res = await readOnePostService.execute(slug)
+        return response.json(res)
     }
 }

@@ -32,7 +32,8 @@ export class MongoDBPostRepository implements AbstractPostRepository {
         return updatedPost ?? null
     }
 
-    async delete(slug: string): Promise<void> {
+    async delete(slug: string): Promise<string> {
         await this.postModel.findOneAndRemove({ slug })
+        return slug
     }
 }

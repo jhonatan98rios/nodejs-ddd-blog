@@ -5,5 +5,5 @@ export abstract class AbstractPostRepository {
     abstract readAll(): Promise<IPost[]>
     abstract readOne(slug: string): Promise<IPost | null>
     abstract update(slug: string, post: IPost): Promise<IPost | null>
-    abstract delete(slug: string): Promise<void>
+    abstract delete(slug: string): Promise<string>
 }
