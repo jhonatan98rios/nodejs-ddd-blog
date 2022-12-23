@@ -1,5 +1,7 @@
 import { Model, model, Schema } from 'mongoose';
+import { Image } from '../../../../domain/models/Image';
 import { IPost } from '../../../../domain/models/Post';
+import { ImageSchema } from './Image.schema'
 
 const PostSchema: Schema = new Schema<IPost, Model<IPost>>({
     slug: { type: String, required: true, unique: true },
@@ -9,6 +11,7 @@ const PostSchema: Schema = new Schema<IPost, Model<IPost>>({
     categories: { type: [String], required: true },
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
+    images: [ ImageSchema ]
 });
 
 export type IPostModel = Model<IPost>

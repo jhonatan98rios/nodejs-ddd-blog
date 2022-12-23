@@ -1,5 +1,6 @@
 import { toSnakeCase } from "../../../../shared/utils/toSnakeCase"
 import { PostDto } from "../../infra/validation/PostValidation.dto"
+import { Image } from "./Image"
 
 export interface IPost {
     slug: string
@@ -9,6 +10,7 @@ export interface IPost {
     categories: string[]
     createdAt: Date
     updatedAt: Date
+    images?: Image[]
 }
 
 export class Post {
@@ -20,6 +22,7 @@ export class Post {
             slug: toSnakeCase(props.title),
             createdAt: props.createdAt ?? new Date(),
             updatedAt: new Date(),
+            images: props.images ?? []
         }
     }
 
@@ -70,5 +73,13 @@ export class Post {
 
     set updatedAt(updatedAt: Date) {
         this.props.updatedAt = updatedAt
+    }
+
+    get images(): Image[]  {
+        return this.props.images ?? []
+    }
+
+    set images(images: Image[]) {
+        this.props.images = images
     }
 }

@@ -4,6 +4,8 @@ CRUD:
 [x] Read One
 [x] Update
 [x] Delete
+[x] Validações
+[ ] Image Upload
 
 Ordem:
 Abstract Repository
