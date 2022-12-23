@@ -5,8 +5,8 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const database = new Database({
-    user: process.env.DATABASE_USER as string,
-    password: process.env.DATABASE_PASS as string
+    user: process.env.DATABASE_USER!,
+    password: process.env.DATABASE_PASS!
 })
 
 const server = new Server(database)

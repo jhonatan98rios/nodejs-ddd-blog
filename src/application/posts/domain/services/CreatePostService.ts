@@ -1,5 +1,5 @@
 import AppError from "../../../../shared/errors/AppError";
-import { CreatePostDto } from "../dtos/CreatePost.dto";
+import { PostDto } from "../../infra/validation/PostValidation.dto";
 import { Post } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 
@@ -11,7 +11,7 @@ export class CreatePostService {
 
     constructor(private postRepository: AbstractPostRepository) {}
 
-    async execute({ title, subtitle, content, categories }: CreatePostDto): Promise<CreatePostResponse> {
+    async execute({ title, subtitle, content, categories }: PostDto): Promise<CreatePostResponse> {
 
         const post = new Post({ title, subtitle, content, categories })
 

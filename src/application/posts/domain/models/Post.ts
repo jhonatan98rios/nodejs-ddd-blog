@@ -1,5 +1,5 @@
 import { toSnakeCase } from "../../../../shared/utils/toSnakeCase"
-import { CreatePostDto } from "../dtos/CreatePost.dto"
+import { PostDto } from "../../infra/validation/PostValidation.dto"
 
 export interface IPost {
     slug: string
@@ -14,7 +14,7 @@ export interface IPost {
 export class Post {
     props: IPost
 
-    constructor(props: CreatePostDto) {
+    constructor(props: PostDto) {
         this.props = {
             ...props,
             slug: toSnakeCase(props.title),
