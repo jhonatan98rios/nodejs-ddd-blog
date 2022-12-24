@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import DiskStorageProvider from '../../../../../adapters/storage/DiskStorageProvider';
+import S3StorageProvider from '../../../../../adapters/storage/S3StorageProvider';
 import { CreatePostService } from "../../../domain/services/CreatePostService"
 import { DeletePostService } from '../../../domain/services/DeletePostService';
 import { ReadAllPostsService } from '../../../domain/services/ReadAllPostsService';
@@ -68,7 +70,13 @@ export class PostController {
         const files = request.files as Express.Multer.File[];
         
         const postRepository = new MongoDBPostRepository()
-        const uploadPostService = new UploadPostService(postRepository)
+        const s3StorageProvider = new S3StorageProvider()
+        const diskStorageProvider = new DiskStorageProvider()
+
+        const uploadPostService = new UploadPostService({
+            postRepository, s3StorageProvider, diskStorageProvider        
+        })
+        
         const post = await uploadPostService.execute(slug, files)
 
         return response.json(post)
