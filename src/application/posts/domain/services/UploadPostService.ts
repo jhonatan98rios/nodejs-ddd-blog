@@ -21,6 +21,11 @@ export class UploadPostService {
 
     constructor(private props: IUploadPostService) {}
 
+    /**
+    * Upload the image to S3 Bucket and update the Post by slug
+    * @param {string} slug - The slug of the post to update
+    * @param {ImageProps[]} files - A list of data files
+    */
     async execute(slug: string, files: ImageProps[]): Promise<UpdatePostResponse> {
 
         const post = await this.props.postRepository.readOne(slug)
@@ -29,33 +34,27 @@ export class UploadPostService {
             throw new AppError('Post not found', 404)
         }
 
-        /* const images = files.map(file => { */
         const images = await Promise.all(
-            files.map(
-                async file => {
+            files.map(async file => {
 
-                    /* Realiza o upload da imagem  */
-                    const imagePath = `${file.destination}\\${file.filename}`
-                    const imageBuffer = fs.readFileSync(imagePath)
-                    const imageDestination = this.props.s3StorageProvider.destination
+                const imagePath = `${file.destination}\\${file.filename}`
+                const imageBuffer = fs.readFileSync(imagePath)
+                const imageDestination = this.props.s3StorageProvider.destination
 
-                    await this.props.s3StorageProvider.imageUpload(
-                        file.filename,
-                        imageBuffer
-                    )
-                    
-                    /* Deletar a imagem do disco */
-                    await this.props.diskStorageProvider.deleteFile(imagePath)
-            
-                    /* Adicionar o caminho ao destination */
-                    return  new Image({
-                        destination: imageDestination,
-                        filename: file.filename,
-                        mimetype: file.mimetype,
-                        size: file.size
-                    })
-                }
-            )
+                await this.props.s3StorageProvider.imageUpload(
+                    file.filename,
+                    imageBuffer
+                )
+                
+                await this.props.diskStorageProvider.deleteFile(imagePath)
+        
+                return  new Image({
+                    destination: imageDestination,
+                    filename: file.filename,
+                    mimetype: file.mimetype,
+                    size: file.size
+                })
+            })
         )
 
         const { title, subtitle, content, categories, createdAt } = post
