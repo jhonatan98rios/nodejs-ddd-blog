@@ -5,6 +5,8 @@ import cors from 'cors';
 import routes from '../routes';
 import Database from '../../database/MongoDB/connection';
 
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocs from './swagger.json'
 
 export class Server {
 
@@ -17,6 +19,7 @@ export class Server {
         this.app.use(express.json());
         this.app.use(routes)
         this.app.use(useAppError)
+        this.app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
         this.app.use('/uploads', express.static('uploads'));
         
