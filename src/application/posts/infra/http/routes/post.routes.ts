@@ -8,16 +8,6 @@ import { uploadConfig } from '../../../../../adapters/storage/config';
 const postRouter = Router()
 const postController = new PostController()
 
-
-/* var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname)
-    }
-}) */
-
 const upload = multer(uploadConfig.multer)
 
 postRouter.post('/', 

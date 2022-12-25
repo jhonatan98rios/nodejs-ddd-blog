@@ -1,5 +1,4 @@
 import { Model, model, Schema } from 'mongoose';
-import { Image } from '../../../../domain/models/Image';
 import { IPost } from '../../../../domain/models/Post';
 import { ImageSchema } from './Image.schema'
 

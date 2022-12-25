@@ -5,7 +5,12 @@ CRUD:
 [x] Update
 [x] Delete
 [x] Validações
-[ ] Image Upload
+[x] Image Upload
+
+[ ] Adicionar as imagens no texto
+[ ] Adicionar campos SEO (title, description, keywords)
+[ ] Adicionar acessibilidade nas imagens (src, alt, title)
+[ ] Adicionar campos aos categories (label, path)
 
 Ordem:
 Abstract Repository

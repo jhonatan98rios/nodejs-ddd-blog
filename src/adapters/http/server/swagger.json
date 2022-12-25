@@ -60,6 +60,29 @@
                 }
             }
         },
+        "/post/": {
+            "get": {
+                "sumary": "Read all",
+                "description": "",
+                "tag": ["Post"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Post"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/post/{slug}": {
             "get": {
                 "sumary": "Post creation",
