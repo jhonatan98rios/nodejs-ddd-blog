@@ -16,19 +16,18 @@ export class Server {
 
         this.app = express()
         this.app.use(cors())
-        this.app.use(express.json());
+        this.app.use(express.json())
         this.app.use(routes)
         this.app.use(useAppError)
         this.app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
-
-        this.app.use('/uploads', express.static('uploads'));
+        this.app.use('/uploads', express.static('uploads'))
         
         database.connect()
     }
 
     public listen(port: number) {
         this.app.listen(process.env.PORT || port, () => {
-            console.log(`Server started on port ${process.env.PORT || port}! 🏆`);
+            console.log(`Server started on port ${process.env.PORT || port}! 🏆`)
         });
     }
 }

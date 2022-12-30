@@ -26,13 +26,10 @@ export default class S3StorageProvider {
       Key: filename,
       Body: body,
     })
-      .promise()
-      .catch(err => {
-        console.log('Deu erro porra', err)
-      })
-      .then(res => {
-        console.log('Imagem enviada', res)
-      })
+    .promise()
+    .catch(err => {
+      console.log('Deu erro porra', err)
+    })      
   }
 
   /**

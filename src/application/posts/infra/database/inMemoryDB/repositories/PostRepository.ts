@@ -1,7 +1,7 @@
 import { IPost } from "../../../../domain/models/Post"
 import { AbstractPostRepository } from "../../../../domain/repositories/AbstractPostRepository";
 
-export class InMemoryPostRepository implements AbstractPostRepository {
+class _InMemoryPostRepository implements AbstractPostRepository {
     
     public posts: IPost[] = []
 
@@ -31,5 +31,18 @@ export class InMemoryPostRepository implements AbstractPostRepository {
     async delete(slug: string): Promise<string> {
         this.posts.filter(post => post.slug != slug)
         return slug
+    }
+}
+
+
+export class InMemoryPostRepository {
+
+    private static instance: _InMemoryPostRepository;
+
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new _InMemoryPostRepository()
+        }
+        return this.instance
     }
 }

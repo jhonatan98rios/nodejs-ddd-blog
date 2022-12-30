@@ -1,10 +1,9 @@
+import fs from 'fs'
 import S3StorageProvider from "../../../../adapters/storage/S3StorageProvider";
 import AppError from "../../../../shared/errors/AppError";
-import { PostDto } from "../../infra/validation/PostValidation.dto";
 import { ImageProps, Image } from "../models/Image";
 import { Post } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
-import fs from 'fs'
 import DiskStorageProvider from "../../../../adapters/storage/DiskStorageProvider";
 
 type UpdatePostResponse = {
@@ -57,14 +56,11 @@ export class UploadPostService {
             })
         )
 
-        const { title, subtitle, content, categories, createdAt } = post
+        const { title, subtitle, content, categories, createdAt, seo_title, seo_description, seo_keywords } = post
         
         const updatedPost = new Post({
-            title, subtitle, content, categories, createdAt, images
+            title, subtitle, content, categories, createdAt, images, seo_title, seo_description, seo_keywords
         })
-
-        console.log('updatedPost')
-        console.log(JSON.stringify(updatedPost.props, null, 2))
 
         await this.props.postRepository.update(slug, updatedPost.props)
         

@@ -10,7 +10,10 @@ const PostSchema: Schema = new Schema<IPost, Model<IPost>>({
     categories: { type: [String], required: true },
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
-    images: [ ImageSchema ]
+    images: [ ImageSchema ],
+    seo_title: { type: String, required: true },
+    seo_description: { type: String, required: true },
+    seo_keywords: { type: String, required: true },
 });
 
 export type IPostModel = Model<IPost>

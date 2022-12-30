@@ -1,7 +1,8 @@
 import { Router } from 'express'
 import { PostController } from '../controllers/PostController'
 import { validateRequest } from 'zod-express-middleware';
-import { PostValidation } from '../../validation/PostValidation.dto';
+import { CreatePost } from '../../validation/CreatePost.dto';
+import { UpdatePost } from '../../validation/UpdatePost.dto';
 import multer from 'multer';
 import { uploadConfig } from '../../../../../adapters/storage/config';
 
@@ -11,7 +12,7 @@ const postController = new PostController()
 const upload = multer(uploadConfig.multer)
 
 postRouter.post('/', 
-    validateRequest({ body: PostValidation }), 
+    validateRequest({ body: CreatePost }), 
     postController.create
 )
 
@@ -20,7 +21,7 @@ postRouter.get('/', postController.readAll)
 postRouter.get('/:slug', postController.readOne)
 
 postRouter.put('/:slug', 
-    validateRequest({ body: PostValidation }), 
+    validateRequest({ body: UpdatePost }), 
     postController.update
 )
 
