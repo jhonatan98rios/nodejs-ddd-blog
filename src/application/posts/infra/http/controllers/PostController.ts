@@ -15,10 +15,10 @@ export class PostController {
     public async create(request: Request, response: Response): Promise<Response> {
         const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords } = request.body
 
-        const inMemoryRepository = InMemoryPostRepository.getInstance()
-        //const postRepository = new MongoDBPostRepository()
+        //const postRepository = InMemoryPostRepository.getInstance()
+        const postRepository = new MongoDBPostRepository()
 
-        const createPostService = new CreatePostService(inMemoryRepository)
+        const createPostService = new CreatePostService(postRepository)
         const post = await createPostService.execute({
             title, subtitle, content, categories, 
             seo_title, seo_description, seo_keywords
@@ -29,10 +29,10 @@ export class PostController {
 
     public async readAll(request: Request, response: Response): Promise<Response> {
 
-        const inMemoryRepository = InMemoryPostRepository.getInstance()
-        /* const postRepository = new MongoDBPostRepository() */
+        //const postRepository = InMemoryPostRepository.getInstance()
+        const postRepository = new MongoDBPostRepository()
 
-        const readAllPostsService = new ReadAllPostsService(inMemoryRepository)
+        const readAllPostsService = new ReadAllPostsService(postRepository)
         const posts = await readAllPostsService.execute()
         return response.json(posts)
     }
@@ -40,10 +40,10 @@ export class PostController {
     public async readOne(request: Request, response: Response): Promise<Response> {
         const { slug } = request.params
 
-        const inMemoryRepository = InMemoryPostRepository.getInstance()
-        /* const postRepository = new MongoDBPostRepository() */
+        //const postRepository = InMemoryPostRepository.getInstance()
+        const postRepository = new MongoDBPostRepository()
 
-        const readOnePostService = new ReadOnePostService(inMemoryRepository)
+        const readOnePostService = new ReadOnePostService(postRepository)
         const posts = await readOnePostService.execute(slug)
         return response.json(posts)
     }
@@ -52,10 +52,10 @@ export class PostController {
         const { slug } = request.params
         const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords } = request.body
         
-        const inMemoryRepository = InMemoryPostRepository.getInstance()
-        /* const postRepository = new MongoDBPostRepository() */
+        //const postRepository = InMemoryPostRepository.getInstance()
+        const postRepository = new MongoDBPostRepository()
 
-        const updatePostService = new UpdatePostService(inMemoryRepository)
+        const updatePostService = new UpdatePostService(postRepository)
         const post = await updatePostService.execute(slug, {
             title, subtitle, content, categories, 
             seo_title, seo_description, seo_keywords
@@ -67,10 +67,10 @@ export class PostController {
     public async delete(request: Request, response: Response): Promise<Response> {
         const { slug } = request.params
 
-        const inMemoryRepository = InMemoryPostRepository.getInstance()
-        /* const postRepository = new MongoDBPostRepository() */
+        //const postRepository = InMemoryPostRepository.getInstance()
+        const postRepository = new MongoDBPostRepository()
 
-        const readOnePostService = new DeletePostService(inMemoryRepository)
+        const readOnePostService = new DeletePostService(postRepository)
         const res = await readOnePostService.execute(slug)
         return response.json(res)
     }
@@ -81,14 +81,14 @@ export class PostController {
         
         const files = request.files as Express.Multer.File[];
 
-        const inMemoryRepository = InMemoryPostRepository.getInstance()
-        /* const postRepository = new MongoDBPostRepository() */
+        //const postRepository = InMemoryPostRepository.getInstance()
+        const postRepository = new MongoDBPostRepository()
         
         const s3StorageProvider = new S3StorageProvider()
         const diskStorageProvider = new DiskStorageProvider()
 
         const uploadPostService = new UploadPostService({
-            postRepository: inMemoryRepository, 
+            postRepository: postRepository, 
             s3StorageProvider, 
             diskStorageProvider        
         })
