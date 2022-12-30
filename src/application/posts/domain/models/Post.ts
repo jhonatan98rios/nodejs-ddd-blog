@@ -1,6 +1,7 @@
 import { tagsToImages } from "../../../../shared/utils/toDynamicContent"
 import { toSnakeCase } from "../../../../shared/utils/toSnakeCase"
 import { CreatePostDto } from "../../infra/validation/CreatePost.dto"
+import { Category } from "./Category"
 import { Image } from "./Image"
 
 export interface IPost {
@@ -8,7 +9,7 @@ export interface IPost {
     title: string
     subtitle: string
     content: string
-    categories: string[]
+    categories: Category[]
     createdAt: Date
     updatedAt: Date
     images?: Image[]
@@ -71,11 +72,11 @@ export class Post {
         })
     }
     
-    get categories(): string[] {
+    get categories(): Category[] {
         return this.props.categories
     }
 
-    set categories(categories: string[]) {
+    set categories(categories: Category[]) {
         this.props.categories = categories
     }
     

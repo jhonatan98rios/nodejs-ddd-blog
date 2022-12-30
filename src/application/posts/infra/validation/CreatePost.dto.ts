@@ -1,11 +1,12 @@
 import { z as zod } from 'zod'
-import { ImageValidation } from './ImageValidation.dto'
+import { CategoryValidation } from './Category.dto'
+import { ImageValidation } from './Image.dto'
 
 export const CreatePost = zod.object({
     title: zod.string().min(4).trim(),
     subtitle: zod.string().min(8).trim(),
     content: zod.string().min(8).trim(),
-    categories: zod.string().min(4).array().length(2),
+    categories: zod.array(CategoryValidation),
     createdAt: zod.date().optional(),
     images: zod.array(ImageValidation).optional(),
     seo_title: zod.string().min(8).trim().optional(),
