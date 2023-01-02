@@ -32,4 +32,9 @@ postRouter.put('/images/:slug',
     postController.imageUpdate
 )
 
+postRouter.post('/image/',
+    upload.single('file'),
+    postController.imageUpload
+)
+
 export default postRouter

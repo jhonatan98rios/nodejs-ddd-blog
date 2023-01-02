@@ -6,6 +6,7 @@ import { DeletePostService } from '../../../domain/services/DeletePostService';
 import { ReadAllPostsService } from '../../../domain/services/ReadAllPostsService';
 import { ReadOnePostService } from '../../../domain/services/ReadOnePostService';
 import { UpdatePostService } from '../../../domain/services/UpdatePostService';
+import { UploadImageService } from '../../../domain/services/UploadImageService';
 import { UploadPostService } from '../../../domain/services/UploadPostService';
 import { InMemoryPostRepository } from '../../database/inMemoryDB/repositories/PostRepository';
 import { MongoDBPostRepository } from '../../database/mongoDB/repositories/PostRepository';
@@ -94,6 +95,23 @@ export class PostController {
         })
         
         const post = await uploadPostService.execute(slug, files)
+
+        return response.json(post)
+    }
+
+    public async imageUpload(request: Request, response: Response): Promise<Response> {
+        
+        const file = request.file as Express.Multer.File;
+        
+        const s3StorageProvider = new S3StorageProvider()
+        const diskStorageProvider = new DiskStorageProvider()
+
+        const uploadImageService = new UploadImageService({
+            s3StorageProvider, 
+            diskStorageProvider        
+        })
+        
+        const post = await uploadImageService.execute(file)
 
         return response.json(post)
     }
