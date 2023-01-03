@@ -1,17 +1,14 @@
 export interface ImageProps {
-    destination: string,
-    filename: string,
+    src: string,
     size: number // Bloquear acima de 5120 (5mb)
 }
 
 export class Image {
-    public destination: string
-    public filename: string
+    public src: string
     public size: number
 
-    constructor({ destination, filename, size }:  ImageProps) {
-        this.destination = destination
-        this.filename = filename
+    constructor({ src, size }:  ImageProps) {
+        this.src = src
         this.size = size
     }
 }

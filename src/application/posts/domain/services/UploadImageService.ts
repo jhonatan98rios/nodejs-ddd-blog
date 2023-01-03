@@ -2,9 +2,14 @@ import fs from 'fs'
 import S3StorageProvider from "../../../../adapters/storage/S3StorageProvider";
 import { ImageProps, Image } from "../models/Image";
 import DiskStorageProvider from "../../../../adapters/storage/DiskStorageProvider";
+import path from 'path';
 
 type UpdateImageResponse = {
     src: string
+    size: number
+}
+
+interface FileProps {
     destination: string
     filename: string
     size: number
@@ -21,11 +26,11 @@ export class UploadImageService {
 
     /**
     * Upload the image to S3 Bucket and update the Post by slug
-    * @param {ImageProps[]} files - A list of data files
+    * @param {FileProps} file - A list of data files
     */
-    async execute(file: ImageProps): Promise<UpdateImageResponse> {
+    async execute(file: FileProps): Promise<UpdateImageResponse> {
 
-        const imagePath = `${file.destination}\\${file.filename}`
+        const imagePath = path.join(file.destination, file.filename)
         const imageBuffer = fs.readFileSync(imagePath)
         const imageDestination = this.props.s3StorageProvider.destination
 
@@ -34,13 +39,13 @@ export class UploadImageService {
             imageBuffer
         )
         
-        await this.props.diskStorageProvider.deleteFile(imagePath)       
+        await this.props.diskStorageProvider.deleteFile(imagePath)
         
-        return { 
+        const banner = new Image({
             src: imageDestination + file.filename,
-            destination: imageDestination,
-            filename: file.filename,
-            size: 64
-        }
+            size: file.size
+        })
+        
+        return banner
     }
 }

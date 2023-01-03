@@ -5,9 +5,16 @@ import { ImageProps, Image } from "../models/Image";
 import { Post } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 import DiskStorageProvider from "../../../../adapters/storage/DiskStorageProvider";
+import path from 'path';
 
 type UpdatePostResponse = {
     updatedPost: Post
+}
+
+interface FileProps {
+    destination: string
+    filename: string
+    size: number
 }
 
 interface IUploadPostService {
@@ -23,9 +30,9 @@ export class UploadPostService {
     /**
     * Upload the image to S3 Bucket and update the Post by slug
     * @param {string} slug - The slug of the post to update
-    * @param {ImageProps[]} file - A list of data files
+    * @param {FileProps} file - A list of data files
     */
-    async execute(slug: string, file: ImageProps): Promise<UpdatePostResponse> {
+    async execute(slug: string, file: FileProps): Promise<UpdatePostResponse> {
 
         const post = await this.props.postRepository.readOne(slug)
         
@@ -33,7 +40,7 @@ export class UploadPostService {
             throw new AppError('Post not found', 404)
         }
 
-        const imagePath = `${file.destination}\\${file.filename}`
+        const imagePath = path.join(file.destination, file.filename)
         const imageBuffer = fs.readFileSync(imagePath)
         const imageDestination = this.props.s3StorageProvider.destination
 
@@ -45,8 +52,7 @@ export class UploadPostService {
         await this.props.diskStorageProvider.deleteFile(imagePath)
 
         const banner = new Image({
-            destination: imageDestination,
-            filename: file.filename,
+            src: imageDestination + file.filename,
             size: file.size
         })
 
