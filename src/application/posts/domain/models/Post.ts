@@ -1,4 +1,3 @@
-import { tagsToImages } from "../../../../shared/utils/toDynamicContent"
 import { toSnakeCase } from "../../../../shared/utils/toSnakeCase"
 import { CreatePostDto } from "../../infra/validation/CreatePost.dto"
 import { Category } from "./Category"
@@ -12,7 +11,7 @@ export interface IPost {
     categories: Category[]
     createdAt: Date
     updatedAt: Date
-    images?: Image[]
+    banner: Image
     seo_title: string
     seo_description: string
     seo_keywords: string
@@ -27,14 +26,9 @@ export class Post {
             slug: toSnakeCase(props.title),
             createdAt: props.createdAt ?? new Date(),
             updatedAt: new Date(),
-            images: props.images ?? [],
             seo_title: props.seo_title ?? `Jhonatan Dev Rios | ${props.title}`,
             seo_description: props.seo_description ?? props.subtitle,
             seo_keywords: props.seo_keywords ?? 'tecnologia'
-        }
-
-        if (this.props.images) {
-            this.content = tagsToImages(this.props.content, this.props.images)
         }
     }
 
@@ -65,11 +59,6 @@ export class Post {
 
     set content(content: string) {
         this.props.content = content
-        
-        this.props.images?.forEach((image, index) => {
-            let src = image.destination + image.filename
-            this.props.content = this.props.content.replace(`#images[${index}]`, src)
-        })
     }
     
     get categories(): Category[] {
@@ -92,12 +81,12 @@ export class Post {
         this.props.updatedAt = updatedAt
     }
 
-    get images(): Image[]  {
-        return this.props.images ?? []
+    get banner(): Image {
+        return this.props.banner
     }
 
-    set images(images: Image[]) {
-        this.props.images = images
+    set banner(banner: Image) {
+        this.props.banner = banner
     }
 
     get seo_title(): string {

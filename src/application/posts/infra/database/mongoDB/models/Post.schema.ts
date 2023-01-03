@@ -11,7 +11,7 @@ const PostSchema: Schema = new Schema<IPost, Model<IPost>>({
     categories: [ CategorySchema ],
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
-    images: [ ImageSchema ],
+    banner: [ ImageSchema ],
     seo_title: { type: String, required: true },
     seo_description: { type: String, required: true },
     seo_keywords: { type: String, required: true },

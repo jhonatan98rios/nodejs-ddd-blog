@@ -14,7 +14,12 @@ import { MongoDBPostRepository } from '../../database/mongoDB/repositories/PostR
 export class PostController {
 
     public async create(request: Request, response: Response): Promise<Response> {
-        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords } = request.body
+        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner } = request.body
+
+        console.log('\n SOCORRO')
+        console.log('request.body')
+        console.log(request.body)
+
 
         //const postRepository = InMemoryPostRepository.getInstance()
         const postRepository = new MongoDBPostRepository()
@@ -22,7 +27,8 @@ export class PostController {
         const createPostService = new CreatePostService(postRepository)
         const post = await createPostService.execute({
             title, subtitle, content, categories, 
-            seo_title, seo_description, seo_keywords
+            seo_title, seo_description, seo_keywords,
+            banner
         })
 
         return response.json(post)
@@ -51,7 +57,7 @@ export class PostController {
 
     public async update(request: Request, response: Response): Promise<Response> {
         const { slug } = request.params
-        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords } = request.body
+        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner } = request.body
         
         //const postRepository = InMemoryPostRepository.getInstance()
         const postRepository = new MongoDBPostRepository()
@@ -59,7 +65,8 @@ export class PostController {
         const updatePostService = new UpdatePostService(postRepository)
         const post = await updatePostService.execute(slug, {
             title, subtitle, content, categories, 
-            seo_title, seo_description, seo_keywords
+            seo_title, seo_description, seo_keywords,
+            banner
         })
 
         return response.json(post)
@@ -80,7 +87,7 @@ export class PostController {
 
         const { slug } = request.params
         
-        const files = request.files as Express.Multer.File[];
+        const file = request.file as Express.Multer.File;
 
         //const postRepository = InMemoryPostRepository.getInstance()
         const postRepository = new MongoDBPostRepository()
@@ -94,7 +101,7 @@ export class PostController {
             diskStorageProvider        
         })
         
-        const post = await uploadPostService.execute(slug, files)
+        const post = await uploadPostService.execute(slug, file)
 
         return response.json(post)
     }

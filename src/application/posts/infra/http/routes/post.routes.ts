@@ -28,7 +28,7 @@ postRouter.put('/:slug',
 postRouter.delete('/:slug', postController.delete)
 
 postRouter.put('/images/:slug',
-    upload.array('file', 4),
+    upload.single('file'),
     postController.imageUpdate
 )
 

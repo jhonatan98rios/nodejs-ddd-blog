@@ -5,6 +5,9 @@ import DiskStorageProvider from "../../../../adapters/storage/DiskStorageProvide
 
 type UpdateImageResponse = {
     src: string
+    destination: string
+    filename: string
+    size: number
 }
 
 interface IUploadPostService {
@@ -33,6 +36,11 @@ export class UploadImageService {
         
         await this.props.diskStorageProvider.deleteFile(imagePath)       
         
-        return { src: imageDestination + file.filename }
+        return { 
+            src: imageDestination + file.filename,
+            destination: imageDestination,
+            filename: file.filename,
+            size: 64
+        }
     }
 }

@@ -13,11 +13,11 @@ export class CreatePostService {
 
     async execute({ 
         title, subtitle, content, categories, 
-        seo_title, seo_description, seo_keywords 
+        seo_title, seo_description, seo_keywords, banner
     }: CreatePostDto): Promise<CreatePostResponse> {
 
         const post = new Post({ 
-            title, subtitle, content, categories, seo_title, seo_description, seo_keywords 
+            title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner
         })
 
         const alreadyExists = await this.postRepository.readOne(post.slug)
