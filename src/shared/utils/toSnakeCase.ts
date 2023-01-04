@@ -4,4 +4,5 @@ export function toSnakeCase(data: string) {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[.,\/#!$%\^&\*;:{}=?`~()]/g,"")
 }
