@@ -16,11 +16,6 @@ export class PostController {
     public async create(request: Request, response: Response): Promise<Response> {
         const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner } = request.body
 
-        console.log('\n SOCORRO')
-        console.log('request.body')
-        console.log(request.body)
-
-
         //const postRepository = InMemoryPostRepository.getInstance()
         const postRepository = new MongoDBPostRepository()
 
