@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { ReadAllUsersService } from '../../../../../application/users/domain/services/ReadAllUsersService';
 import { CheckInSessionService } from '../../../domain/services/CheckInSessionService';
 import { CreateSessionService } from '../../../domain/services/CreateSessionService';
 import { CreateUserService } from '../../../domain/services/CreateUserService';
@@ -21,6 +22,17 @@ export class UserController {
 
         return response.json(createdUser)
     }
+
+
+    public async readAll(request: Request, response: Response): Promise<Response> {
+
+        const userRepository = new MongoDBUserRepository()
+        
+        const readAllUsersService = new ReadAllUsersService(userRepository)
+        const users = await readAllUsersService.execute()
+        return response.json(users)
+    }
+
 
     public async readOne(request: Request, response: Response): Promise<Response> {
         const { user } = request.params

@@ -7,6 +7,8 @@ import { UserController } from "../controllers/UserController";
 const userRouter = Router()
 const userController = new UserController()
 
+userRouter.get('/', userController.readAll)
+
 userRouter.get('/:user', userController.readOne)
 
 userRouter.post('/',

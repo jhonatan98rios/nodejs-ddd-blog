@@ -5,9 +5,15 @@
     "lib": ["es6"],
     "allowJs": true,
     "outDir": "build",
+    "rootDir": "src",
     "strict": true,
     "noImplicitAny": true,
     "strictPropertyInitialization": false,
+    "baseUrl": "./",
+    "typeRoots": [
+      "src/@types",
+      "./node_modules/@types"
+    ],
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
