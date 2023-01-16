@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { UpdateUserService } from '../../../../../application/users/domain/services/UpdateUserService';
 import { ReadAllUsersService } from '../../../../../application/users/domain/services/ReadAllUsersService';
 import { CheckInSessionService } from '../../../domain/services/CheckInSessionService';
 import { CreateSessionService } from '../../../domain/services/CreateSessionService';
@@ -21,6 +22,22 @@ export class UserController {
         })
 
         return response.json(createdUser)
+    }
+
+
+    public async update(request: Request, response: Response): Promise<Response> {
+
+        const { username } = request.params
+        const { user, password } = request.body
+
+        const userRepository = new MongoDBUserRepository()
+
+        const updateUserService = new UpdateUserService(userRepository)
+        const updatedUser = await updateUserService.execute({
+            username, user, password
+        })
+
+        return response.json(updatedUser)
     }
 
 

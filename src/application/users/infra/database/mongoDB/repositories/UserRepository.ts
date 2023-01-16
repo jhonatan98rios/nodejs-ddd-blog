@@ -25,4 +25,9 @@ export class MongoDBUserRepository implements AbstractUserRepository {
         const findedUser = await this.userModel.findOne({ user })
         return findedUser
     }
+
+    async update(username: string, user: IUser): Promise<IUser> {
+        await this.userModel.findOneAndUpdate({ user: username }, user)
+        return user
+    }
 }

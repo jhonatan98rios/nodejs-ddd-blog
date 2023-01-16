@@ -5,4 +5,5 @@ export abstract class AbstractUserRepository {
     abstract create(user: CreateUserDto): Promise<IUser>
     abstract readAll(): Promise<IUser[] | null>
     abstract readOne(user: string): Promise<IUser | null>
+    abstract update(username: string, user: CreateUserDto): Promise<IUser>
 }

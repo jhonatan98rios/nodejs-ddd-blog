@@ -11,6 +11,11 @@ userRouter.get('/', userController.readAll)
 
 userRouter.get('/:user', userController.readOne)
 
+userRouter.put('/:username', 
+    validateRequest({body: CreateUser}),
+    userController.update
+)
+
 userRouter.post('/',
     validateRequest({body: CreateUser}),
     userController.create
