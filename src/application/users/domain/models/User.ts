@@ -1,15 +1,20 @@
-import { CreateUserDto } from "../../infra/validation/CreateUser.dto"
+export enum Role {
+    READ = 'read',
+    WRITE = 'write',
+    ADMIN = 'admin'
+}
 
 export interface IUser {
     user: string
     password: string
+    role: Role
 }
 
 export class User {
 
     props: IUser
 
-    constructor(props: CreateUserDto) {
+    constructor(props: IUser) {
         this.props = props
     }
 
@@ -27,5 +32,13 @@ export class User {
 
     set password(password: string) {
         this.props.password = password
+    }
+
+    get role(): Role {
+        return this.props.role || Role.READ
+    }
+
+    set role(role: Role) {
+        this.props.role = role
     }
 }

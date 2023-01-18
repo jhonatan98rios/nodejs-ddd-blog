@@ -5,4 +5,8 @@ export const CreateUser = zod.object({
     password: zod.string().min(8).trim()
 })
 
-export type CreateUserDto = zod.infer<typeof CreateUser>
+export type CreateUserDto = {
+    user: string
+    password: string
+    role?: string
+}

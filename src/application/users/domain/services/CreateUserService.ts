@@ -1,7 +1,7 @@
 import AppError from "../../../../shared/errors/AppError"
 import { generateHash } from "../../../../shared/utils/hash"
 import { CreateUserDto } from "../../infra/validation/CreateUser.dto"
-import { User } from "../models/User"
+import { Role, User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 
 type CreateUserResponse = {
@@ -25,7 +25,8 @@ export class CreateUserService {
 
         const createdUser = new User({
             user, 
-            password: hashedPassword
+            role: Role.READ,
+            password: hashedPassword,
         })
 
         await this.userRepository.create(createdUser.props)

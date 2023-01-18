@@ -7,6 +7,7 @@ import { CreateUserService } from '../../../domain/services/CreateUserService';
 import { ReadOneUserService } from '../../../domain/services/ReadOneUserService';
 import { MongoDBUserRepository } from '../../database/mongoDB/repositories/UserRepository';
 import { MongoDBUserTokenRepository } from '../../database/mongoDB/repositories/UserTokenRepository';
+import { UpdateUserRoleService } from '../../../../../application/users/domain/services/UpdateUserRoleService';
 
 export class UserController {
 
@@ -35,6 +36,21 @@ export class UserController {
         const updateUserService = new UpdateUserService(userRepository)
         const updatedUser = await updateUserService.execute({
             username, password
+        })
+
+        return response.json(updatedUser)
+    }
+
+
+    public async updateUserRole(request: Request, response: Response): Promise<Response> {
+
+        const { username } = request.params
+        const { role } = request.body
+
+        const userRepository = new MongoDBUserRepository()
+        const updateUserRoleService = new UpdateUserRoleService(userRepository)
+        const updatedUser = await updateUserRoleService.execute({
+            username, role
         })
 
         return response.json(updatedUser)

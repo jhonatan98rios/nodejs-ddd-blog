@@ -12,12 +12,9 @@ const postController = new PostController()
 
 const upload = multer(uploadConfig.multer)
 
-//postRouter.use(useAuthentication)
-
 postRouter.get('/', postController.readAll)
 
 postRouter.get('/:slug', postController.readOne)
-
 
 postRouter.post('/', 
     useAuthentication,

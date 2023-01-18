@@ -1,20 +1,19 @@
+import { roleValidation } from "../../../../shared/utils/RoleValidation"
 import AppError from "../../../../shared/errors/AppError"
-import { generateHash } from "../../../../shared/utils/hash"
-import { CreateUserDto } from "../../infra/validation/CreateUser.dto"
-import { UpdateUserDto } from "../../infra/validation/UpdateUser.dto"
-import { User } from "../models/User"
+import { UpdateUserRoleDto } from "../../infra/validation/UpdateUserRole.dto"
+import { Role, User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 
-type UpdateUserResponse = {
+type UpdateUserRoleReponse = {
     user: User
 }
 
-export class UpdateUserService {
+export class UpdateUserRoleService {
     constructor(private userRepository: AbstractUserRepository) {}
 
     async execute({
-        username, password
-    }: UpdateUserDto): Promise<UpdateUserResponse> {
+        username, role
+    }: UpdateUserRoleDto): Promise<UpdateUserRoleReponse> {
 
         const userAlreadyExists = await this.userRepository.readOne(username)
 
@@ -22,12 +21,10 @@ export class UpdateUserService {
             throw new AppError(`The user ${username} did not exists`, 404)
         }
 
-        const hashedPassword = await generateHash(password)
-
         const updatedUser = new User({
-            user: username, 
-            password: hashedPassword,
-            role: userAlreadyExists.role
+            role: roleValidation(role),
+            user: username,
+            password: userAlreadyExists.password
         })
 
         await this.userRepository.update(username, updatedUser.props)
