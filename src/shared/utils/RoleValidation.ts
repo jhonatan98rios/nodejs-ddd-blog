@@ -1,12 +1,12 @@
 import AppError from "../errors/AppError";
-import { Role } from "../../application/users/domain/models/User";
+import { Roles } from "../../application/users/domain/models/User";
 
-export function roleValidation(role: string): Role {
+export function roleValidation(role: string): Roles {
 
     const roles = {
-        'read': Role.READ,
-        'write': Role.WRITE,
-        'admin': Role.ADMIN
+        'read': Roles.READ,
+        'write': Roles.WRITE,
+        'admin': Roles.ADMIN
     } as any
 
     if (!Object.keys(roles).includes(role)) {

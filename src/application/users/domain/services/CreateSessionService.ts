@@ -36,10 +36,16 @@ export class CreateSessionService {
             throw new AppError('Incorrect email/password combination.', 401);
         }
 
-         const token = sign({}, authConfig.jwt.secret as Secret, {
+        const payload = {
+            role: findedUser.role,
+        }
+
+        const options = {
             subject: user,
             expiresIn: authConfig.jwt.expiresIn
-        })
+        }
+
+        const token = sign(payload, authConfig.jwt.secret as Secret, options)
         
         const userToken = new UserToken({
             token, user

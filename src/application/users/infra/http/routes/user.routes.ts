@@ -5,6 +5,8 @@ import { CreateSession } from "../../validation/CreateSession.dto";
 import { UserController } from "../controllers/UserController";
 import { UpdateUser } from "../../validation/UpdateUser.dto";
 import { UpdateUserRole } from "../../validation/UpdateUserRole.dto";
+import { useAuthentication } from "../../../../../adapters/http/middlewares/useAuthentication";
+import { useAuthorization } from "../../../../../adapters/http/middlewares/useAuthorization";
 
 const userRouter = Router()
 const userController = new UserController()
@@ -13,12 +15,14 @@ userRouter.get('/', userController.readAll)
 
 userRouter.get('/:user', userController.readOne)
 
-userRouter.put('/:username', 
+userRouter.put('/:username', // Pegar o username do token
     validateRequest({body: CreateUser}),
     userController.update
 )
 
-userRouter.put('/role/:username', 
+userRouter.put('/role/:username',
+    useAuthentication,
+    useAuthorization('admin'),
     validateRequest({body: UpdateUserRole}),
     userController.updateUserRole
 )

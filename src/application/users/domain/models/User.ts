@@ -1,4 +1,4 @@
-export enum Role {
+export enum Roles {
     READ = 'read',
     WRITE = 'write',
     ADMIN = 'admin'
@@ -7,7 +7,7 @@ export enum Role {
 export interface IUser {
     user: string
     password: string
-    role: Role
+    role: Roles
 }
 
 export class User {
@@ -34,11 +34,11 @@ export class User {
         this.props.password = password
     }
 
-    get role(): Role {
-        return this.props.role || Role.READ
+    get role(): Roles {
+        return this.props.role || Roles.READ
     }
 
-    set role(role: Role) {
+    set role(role: Roles) {
         this.props.role = role
     }
 }

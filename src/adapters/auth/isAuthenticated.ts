@@ -6,6 +6,7 @@ interface ITokenPayload {
     iat: number
     exp: number
     sub: string
+    role: string
 }
 
 export function isAuthenticated(authHeader: string) {
@@ -14,8 +15,9 @@ export function isAuthenticated(authHeader: string) {
 
     try {
         const decodedToken = verify(token, authConfig.jwt.secret as Secret)
-        const { sub } = decodedToken as ITokenPayload
-        return sub
+
+        const { sub, role } = decodedToken as ITokenPayload
+        return {sub, role}
 
       } catch {
         throw new AppError('Invalid JWT Token.');

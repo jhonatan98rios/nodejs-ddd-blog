@@ -1,7 +1,7 @@
 import { roleValidation } from "../../../../shared/utils/RoleValidation"
 import AppError from "../../../../shared/errors/AppError"
 import { UpdateUserRoleDto } from "../../infra/validation/UpdateUserRole.dto"
-import { Role, User } from "../models/User"
+import { Roles, User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 
 type UpdateUserRoleReponse = {

@@ -14,10 +14,11 @@ export function useAuthentication(
         throw new AppError('JWT Token is missing.')
     }
 
-    const userAuthentication = isAuthenticated(authHeader)
+    const { sub, role } = isAuthenticated(authHeader)
 
     request.user = {
-        id: userAuthentication
+        id: sub,
+        role
     }
 
     return next()
