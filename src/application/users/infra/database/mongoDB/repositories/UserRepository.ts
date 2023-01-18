@@ -1,5 +1,6 @@
 import { IUser } from "../../../../domain/models/User";
 import { AbstractUserRepository } from "../../../../domain/repositories/AbstractUserRepository";
+import { UpdateUserDto } from "../../../validation/UpdateUser.dto";
 import { IUserModel, UserModel } from "../models/User.schema";
 
 
@@ -26,7 +27,7 @@ export class MongoDBUserRepository implements AbstractUserRepository {
         return findedUser
     }
 
-    async update(username: string, user: IUser): Promise<IUser> {
+    async update(username: string, user: UpdateUserDto): Promise<UpdateUserDto> {
         await this.userModel.findOneAndUpdate({ user: username }, user)
         return user
     }

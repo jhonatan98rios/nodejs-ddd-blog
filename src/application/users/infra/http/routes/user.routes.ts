@@ -3,6 +3,7 @@ import { validateRequest } from "zod-express-middleware";
 import { CreateUser } from "../../validation/CreateUser.dto";
 import { CreateSession } from "../../validation/CreateSession.dto";
 import { UserController } from "../controllers/UserController";
+import { UpdateUser } from "../../validation/UpdateUser.dto";
 
 const userRouter = Router()
 const userController = new UserController()
@@ -17,7 +18,7 @@ userRouter.put('/:username',
 )
 
 userRouter.post('/',
-    validateRequest({body: CreateUser}),
+    validateRequest({body: UpdateUser}),
     userController.create
 )
 
