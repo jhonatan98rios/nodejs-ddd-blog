@@ -15,20 +15,8 @@ userRouter.get('/', userController.readAll)
 
 userRouter.get('/:user', userController.readOne)
 
-userRouter.put('/:username', // Pegar o username do token
-    validateRequest({body: CreateUser}),
-    userController.update
-)
-
-userRouter.put('/role/:username',
-    useAuthentication,
-    useAuthorization('admin'),
-    validateRequest({body: UpdateUserRole}),
-    userController.updateUserRole
-)
-
 userRouter.post('/',
-    validateRequest({body: UpdateUser}),
+    validateRequest({body: CreateUser}),
     userController.create
 )
 
@@ -39,6 +27,18 @@ userRouter.post('/login',
 
 userRouter.post('/check-in',
     userController.checkIn
+)
+
+userRouter.put('/:username',
+    validateRequest({body: UpdateUser}),
+    userController.update
+)
+
+userRouter.put('/role/:username',
+    useAuthentication,
+    useAuthorization('admin'),
+    validateRequest({body: UpdateUserRole}),
+    userController.updateUserRole
 )
 
 export default userRouter
