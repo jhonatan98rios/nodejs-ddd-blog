@@ -11,7 +11,6 @@ import { useAuthorization } from "../../../../../adapters/http/middlewares/useAu
 const userRouter = Router()
 const userController = new UserController()
 
-userRouter.get('/', userController.readAll)
 
 userRouter.get('/:user', userController.readOne)
 
@@ -30,8 +29,14 @@ userRouter.post('/check-in',
 )
 
 userRouter.put('/:username',
+    useAuthentication,
     validateRequest({body: UpdateUser}),
     userController.update
+)
+
+userRouter.get('/',
+    useAuthentication,
+    userController.readAll
 )
 
 userRouter.put('/role/:username',

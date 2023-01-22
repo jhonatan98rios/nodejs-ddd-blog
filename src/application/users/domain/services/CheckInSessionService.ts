@@ -6,7 +6,8 @@ import { AbstractUserTokenRepository } from "../repositories/AbstractUserTokenRe
 
 type CheckInSessionResponse = {
     user: string,
-    token: string
+    token: string,
+    role: string
 }
 
 export class CheckInSessionService {
@@ -38,7 +39,8 @@ export class CheckInSessionService {
 
         return {
             user: userToken.user,
-            token: userToken.token
+            token: userToken.token,
+            role: user.role
         }
     }
 }

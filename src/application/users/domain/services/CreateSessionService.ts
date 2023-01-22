@@ -9,7 +9,8 @@ import { UserToken } from '../models/UserToken';
 
 type CreateSessionResponse = {
     user: string,
-    token: string
+    token: string,
+    role: string,
 }
 
 export class CreateSessionService {
@@ -55,7 +56,8 @@ export class CreateSessionService {
        
         return {
             user: userToken.user,
-            token: token
+            token: token,
+            role: findedUser.role
         }
     }
 }
