@@ -6,11 +6,15 @@
   "scripts": {
     "-dev": "ts-node ./src/main.ts",
     "dev": "ts-node-dev ./src/main.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "dev2": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/main.ts",
+    "build2": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
+    "@types/jsonwebtoken": "^9.0.0",
     "@types/multer": "^1.4.7",
     "@types/node": "^18.11.17",
     "@types/swagger-ui-express": "^4.1.3",
@@ -20,14 +24,20 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@adminjs/express": "^5.0.1",
+    "@adminjs/mongoose": "^3.0.1",
     "@types/mongoose": "^5.11.97",
+    "adminjs": "^6.7.2",
     "aws-sdk": "^2.1282.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
-    "mongoose": "^6.8.1",
+    "mongoose": "^6.8.2",
     "multer": "^1.4.5-lts.1",
     "swagger-ui-express": "^4.6.0",
     "zod": "^3.20.2",

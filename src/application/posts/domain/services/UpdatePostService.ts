@@ -19,7 +19,7 @@ export class UpdatePostService {
             throw new AppError('Post not found', 404)
         }
 
-        const { title, subtitle, content, categories, createdAt, images, seo_title, seo_description, seo_keywords } = post
+        const { title, subtitle, content, categories, createdAt, banner, seo_title, seo_description, seo_keywords } = post
         
         const updatedPost = new Post({
             title: updatePostDto.title ?? title, 
@@ -27,7 +27,7 @@ export class UpdatePostService {
             content: updatePostDto.content ?? content, 
             categories: updatePostDto.categories ?? categories, 
             createdAt: updatePostDto.createdAt ?? createdAt, 
-            images: updatePostDto.images ?? images, 
+            banner: updatePostDto.banner ?? banner, 
             seo_title: updatePostDto.seo_title ?? seo_title, 
             seo_description: updatePostDto.seo_description ?? seo_description, 
             seo_keywords: updatePostDto.seo_keywords ?? seo_keywords

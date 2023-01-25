@@ -1,5 +1,6 @@
 import { Model, model, Schema } from 'mongoose';
 import { IPost } from '../../../../domain/models/Post';
+import { CategorySchema } from './Category.schema';
 import { ImageSchema } from './Image.schema'
 
 const PostSchema: Schema = new Schema<IPost, Model<IPost>>({
@@ -7,10 +8,10 @@ const PostSchema: Schema = new Schema<IPost, Model<IPost>>({
     title: { type: String, required: true, unique: true },
     subtitle: { type: String, required: true },
     content: { type: String, required: true },
-    categories: { type: [String], required: true },
+    categories: [ CategorySchema ],
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
-    images: [ ImageSchema ],
+    banner: ImageSchema,
     seo_title: { type: String, required: true },
     seo_description: { type: String, required: true },
     seo_keywords: { type: String, required: true },

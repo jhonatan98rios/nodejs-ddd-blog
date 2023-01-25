@@ -5,9 +5,16 @@ import { ImageProps, Image } from "../models/Image";
 import { Post } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 import DiskStorageProvider from "../../../../adapters/storage/DiskStorageProvider";
+import path from 'path';
 
 type UpdatePostResponse = {
     updatedPost: Post
+}
+
+interface FileProps {
+    destination: string
+    filename: string
+    size: number
 }
 
 interface IUploadPostService {
@@ -23,9 +30,9 @@ export class UploadPostService {
     /**
     * Upload the image to S3 Bucket and update the Post by slug
     * @param {string} slug - The slug of the post to update
-    * @param {ImageProps[]} files - A list of data files
+    * @param {FileProps} file - A list of data files
     */
-    async execute(slug: string, files: ImageProps[]): Promise<UpdatePostResponse> {
+    async execute(slug: string, file: FileProps): Promise<UpdatePostResponse> {
 
         const post = await this.props.postRepository.readOne(slug)
         
@@ -33,33 +40,26 @@ export class UploadPostService {
             throw new AppError('Post not found', 404)
         }
 
-        const images = await Promise.all(
-            files.map(async file => {
+        const imagePath = path.join(file.destination, file.filename)
+        const imageBuffer = fs.readFileSync(imagePath)
+        const imageDestination = this.props.s3StorageProvider.destination
 
-                const imagePath = `${file.destination}\\${file.filename}`
-                const imageBuffer = fs.readFileSync(imagePath)
-                const imageDestination = this.props.s3StorageProvider.destination
-
-                await this.props.s3StorageProvider.imageUpload(
-                    file.filename,
-                    imageBuffer
-                )
-                
-                await this.props.diskStorageProvider.deleteFile(imagePath)
-        
-                return  new Image({
-                    destination: imageDestination,
-                    filename: file.filename,
-                    mimetype: file.mimetype,
-                    size: file.size
-                })
-            })
+        await this.props.s3StorageProvider.imageUpload(
+            file.filename,
+            imageBuffer
         )
+        
+        await this.props.diskStorageProvider.deleteFile(imagePath)
+
+        const banner = new Image({
+            src: imageDestination + file.filename,
+            size: file.size
+        })
 
         const { title, subtitle, content, categories, createdAt, seo_title, seo_description, seo_keywords } = post
         
         const updatedPost = new Post({
-            title, subtitle, content, categories, createdAt, images, seo_title, seo_description, seo_keywords
+            title, subtitle, content, categories, createdAt, banner, seo_title, seo_description, seo_keywords
         })
 
         await this.props.postRepository.update(slug, updatedPost.props)
