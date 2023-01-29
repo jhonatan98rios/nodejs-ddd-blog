@@ -56,10 +56,12 @@ export class UploadPostService {
             size: file.size
         })
 
-        const { title, subtitle, content, categories, createdAt, seo_title, seo_description, seo_keywords } = post
+        const { title, subtitle, content, categories, createdAt, status, language,
+            seo_title, seo_description, seo_keywords } = post
         
         const updatedPost = new Post({
-            title, subtitle, content, categories, createdAt, banner, seo_title, seo_description, seo_keywords
+            title, subtitle, content, categories, createdAt, banner, status, language,
+            seo_title, seo_description, seo_keywords
         })
 
         await this.props.postRepository.update(slug, updatedPost.props)

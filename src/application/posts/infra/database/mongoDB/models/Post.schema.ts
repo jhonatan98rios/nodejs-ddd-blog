@@ -15,6 +15,8 @@ const PostSchema: Schema = new Schema<IPost, Model<IPost>>({
     seo_title: { type: String, required: true },
     seo_description: { type: String, required: true },
     seo_keywords: { type: String, required: true },
+    status: { type: String, required: true },
+    language: { type: String, required: true },
 });
 
 export type IPostModel = Model<IPost>

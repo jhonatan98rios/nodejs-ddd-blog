@@ -8,6 +8,7 @@ import { ReadOneUserService } from '../../../domain/services/ReadOneUserService'
 import { MongoDBUserRepository } from '../../database/mongoDB/repositories/UserRepository';
 import { MongoDBUserTokenRepository } from '../../database/mongoDB/repositories/UserTokenRepository';
 import { UpdateUserRoleService } from '../../../../../application/users/domain/services/UpdateUserRoleService';
+import { LogoutSessionService } from '../../../../../application/users/domain/services/LogoutSessionService';
 
 export class UserController {
 
@@ -104,5 +105,18 @@ export class UserController {
 
         const session = await checkInSession.execute(token)
         return response.json(session)
+    }
+
+    public async logout(request: Request, response: Response): Promise<Response> {
+
+        const { username } = request.params
+
+        const userRepository = new MongoDBUserRepository()
+        const userTokenRepository = new MongoDBUserTokenRepository()
+        
+        const logoutService = new LogoutSessionService(userRepository, userTokenRepository)
+        
+        await logoutService.execute(username)
+        return response.status(202).send()
     }
 }

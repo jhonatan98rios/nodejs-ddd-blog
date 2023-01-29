@@ -14,7 +14,7 @@ import { MongoDBPostRepository } from '../../database/mongoDB/repositories/PostR
 export class PostController {
 
     public async create(request: Request, response: Response): Promise<Response> {
-        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner } = request.body
+        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner, language } = request.body
 
         //const postRepository = InMemoryPostRepository.getInstance()
         const postRepository = new MongoDBPostRepository()
@@ -23,7 +23,7 @@ export class PostController {
         const post = await createPostService.execute({
             title, subtitle, content, categories, 
             seo_title, seo_description, seo_keywords,
-            banner
+            banner, language
         })
 
         return response.json(post)
@@ -52,7 +52,7 @@ export class PostController {
 
     public async update(request: Request, response: Response): Promise<Response> {
         const { slug } = request.params
-        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner } = request.body
+        const { title, subtitle, content, categories, seo_title, seo_description, seo_keywords, banner, language, status } = request.body
         
         //const postRepository = InMemoryPostRepository.getInstance()
         const postRepository = new MongoDBPostRepository()
@@ -61,7 +61,7 @@ export class PostController {
         const post = await updatePostService.execute(slug, {
             title, subtitle, content, categories, 
             seo_title, seo_description, seo_keywords,
-            banner
+            banner, language, status
         })
 
         return response.json(post)

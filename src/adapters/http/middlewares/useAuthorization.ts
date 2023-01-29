@@ -21,12 +21,18 @@ export function useAuthorization(requiredRole: string) {
 
 function isAuthorized(requiredRole: string, userRole: string) {
 
+    const isAuthorized = userRole === Roles.ADMIN 
+    ? true 
+    : requiredRole === Roles.WRITE && userRole === Roles.WRITE 
+        ? true 
+        : false
+
+    if (!isAuthorized) {
+        throw new AppError('The user does not meet the minimum permissions');
+    }
+
     console.log('userRole: ', userRole)
     console.log('requiredRole: ', requiredRole)
 
-    return userRole === Roles.ADMIN 
-        ? true 
-        : requiredRole === Roles.WRITE && userRole === Roles.WRITE 
-            ? true 
-            : false
+    return isAuthorized
 }
