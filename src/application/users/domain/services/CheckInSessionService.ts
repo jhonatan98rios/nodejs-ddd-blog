@@ -1,6 +1,5 @@
 import { addHours, isAfter } from "date-fns";
 import AppError from "../../../../shared/errors/AppError";
-import { CreateSessionDto } from "../../infra/validation/CreateSession.dto";
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository";
 import { AbstractUserTokenRepository } from "../repositories/AbstractUserTokenRepository";
 

@@ -49,7 +49,9 @@ export class UserController {
         const { role } = request.body
 
         const userRepository = new MongoDBUserRepository()
-        const updateUserRoleService = new UpdateUserRoleService(userRepository)
+        const userTokenRepository = new MongoDBUserTokenRepository()
+
+        const updateUserRoleService = new UpdateUserRoleService(userRepository, userTokenRepository)
         const updatedUser = await updateUserRoleService.execute({
             username, role
         })

@@ -3,13 +3,17 @@ import AppError from "../../../../shared/errors/AppError"
 import { UpdateUserRoleDto } from "../../infra/validation/UpdateUserRole.dto"
 import { Roles, User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
+import { AbstractUserTokenRepository } from "../repositories/AbstractUserTokenRepository"
 
 type UpdateUserRoleReponse = {
     user: User
 }
 
 export class UpdateUserRoleService {
-    constructor(private userRepository: AbstractUserRepository) {}
+    constructor(
+        private userRepository: AbstractUserRepository,
+        private userTokenRepository: AbstractUserTokenRepository
+    ) {}
 
     async execute({
         username, role
@@ -28,6 +32,8 @@ export class UpdateUserRoleService {
         })
 
         await this.userRepository.update(username, updatedUser.props)
+        await this.userTokenRepository.delete(username)
+
         return { user: updatedUser }
     }
 }
