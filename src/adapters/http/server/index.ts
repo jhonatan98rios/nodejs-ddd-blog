@@ -1,14 +1,19 @@
 import 'express-async-errors';
 import express, { Express } from 'express'
-import { useAppError } from '../middlewares/useAppError'
+import swaggerUI from 'swagger-ui-express';
+
 import cors from 'cors';
+import helmet from 'helmet'
+import xss from 'xss-clean'
+
 import routes from '../routes';
+import { useAppError } from '../middlewares/useAppError'
+import { rateLimiter } from '../middlewares/useRateLimit';
 import Database from '../../database/MongoDB/connection';
 
-import swaggerUI from 'swagger-ui-express';
 import swaggerDocs from './swagger.json'
 import { AdminPanel } from '../admin';
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 
 
 interface IServer {
@@ -24,8 +29,14 @@ export class Server {
     constructor() {
 
         this.app = express()
-        this.app.use(cors())
         this.app.use(express.json())
+
+        this.app.use(cors())
+        this.app.use(helmet())
+        this.app.use(xss())
+        this.app.use(rateLimiter())
+        this.app.disable('x-powered-by')
+
         this.app.use(routes)
         this.app.use(useAppError)
         this.app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
