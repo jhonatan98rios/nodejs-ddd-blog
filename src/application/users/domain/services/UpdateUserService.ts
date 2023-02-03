@@ -1,6 +1,5 @@
 import AppError from "../../../../shared/errors/AppError"
 import { generateHash } from "../../../../shared/utils/hash"
-import { CreateUserDto } from "../../infra/validation/CreateUser.dto"
 import { UpdateUserDto } from "../../infra/validation/UpdateUser.dto"
 import { User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
@@ -25,7 +24,8 @@ export class UpdateUserService {
         const hashedPassword = await generateHash(password)
 
         const updatedUser = new User({
-            user: username, 
+            user: username,
+            mail: userAlreadyExists.mail,
             password: hashedPassword,
             role: userAlreadyExists.role
         })

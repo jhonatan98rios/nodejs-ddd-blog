@@ -6,6 +6,7 @@ export enum Roles {
 
 export interface IUser {
     user: string
+    mail: string
     password: string
     role: Roles
 }
@@ -24,6 +25,14 @@ export class User {
 
     set user(user: string) {
         this.props.user = user
+    }
+
+    get mail(): string {
+        return this.props.mail
+    }
+
+    set mail(mail: string) {
+        this.props.mail = mail
     }
 
     get password(): string {

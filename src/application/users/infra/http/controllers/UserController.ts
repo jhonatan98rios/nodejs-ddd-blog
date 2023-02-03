@@ -14,13 +14,13 @@ export class UserController {
 
     public async create(request: Request, response: Response): Promise<Response> {
 
-        const { user, password } = request.body
+        const { user, password, mail } = request.body
 
         const userRepository = new MongoDBUserRepository()
 
         const createUserService = new CreateUserService(userRepository)
         const createdUser = await createUserService.execute({
-            user, password
+            user, password, mail
         })
 
         return response.json(createdUser)

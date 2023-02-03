@@ -12,7 +12,7 @@ export class CreateUserService {
     constructor(private userRepository: AbstractUserRepository) {}
 
     async execute({
-        user, password
+        user, password, mail
     }: CreateUserDto): Promise<CreateUserResponse> {
 
         const userAlreadyExists = await this.userRepository.readOne(user)
@@ -24,7 +24,8 @@ export class CreateUserService {
         const hashedPassword = await generateHash(password)
 
         const createdUser = new User({
-            user, 
+            user,
+            mail,
             role: Roles.READ,
             password: hashedPassword,
         })

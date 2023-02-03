@@ -46,7 +46,6 @@ userRouter.put('/role/:username',
     userController.updateUserRole
 )
 
-
 userRouter.delete('/logout/:username',
     userController.logout
 )

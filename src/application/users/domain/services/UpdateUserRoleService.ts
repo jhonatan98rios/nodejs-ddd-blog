@@ -1,7 +1,7 @@
 import { roleValidation } from "../../../../shared/utils/RoleValidation"
 import AppError from "../../../../shared/errors/AppError"
 import { UpdateUserRoleDto } from "../../infra/validation/UpdateUserRole.dto"
-import { Roles, User } from "../models/User"
+import { User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 import { AbstractUserTokenRepository } from "../repositories/AbstractUserTokenRepository"
 
@@ -28,6 +28,7 @@ export class UpdateUserRoleService {
         const updatedUser = new User({
             role: roleValidation(role),
             user: username,
+            mail: userAlreadyExists.mail,
             password: userAlreadyExists.password
         })
 
