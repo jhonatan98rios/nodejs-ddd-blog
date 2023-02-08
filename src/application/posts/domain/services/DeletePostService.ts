@@ -1,4 +1,4 @@
-import AppError from "../../../../shared/errors/AppError";
+import AppError from "@shared/errors/AppError";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 
 type DeletePostResponse = {

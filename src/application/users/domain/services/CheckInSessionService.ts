@@ -1,5 +1,5 @@
 import { addHours, isAfter } from "date-fns";
-import AppError from "../../../../shared/errors/AppError";
+import AppError from "@shared/errors/AppError";
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository";
 import { AbstractUserTokenRepository } from "../repositories/AbstractUserTokenRepository";
 

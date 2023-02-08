@@ -1,4 +1,4 @@
-import AppError from "../../../../shared/errors/AppError";
+import AppError from "@shared/errors/AppError";
 import { IPost } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 

@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "-dev": "ts-node ./src/main.ts",
-    "dev": "ts-node-dev ./src/main.ts",
-    "build": "tsc",
-    "dev2": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/main.ts",
-    "build2": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files"
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/main.ts",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "dev2": "ts-node-dev ./src/main.ts"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -21,11 +19,13 @@
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.4"
   },
   "dependencies": {
     "@adminjs/express": "^5.0.1",
     "@adminjs/mongoose": "^3.0.1",
+    "@types/dotenv": "^8.2.0",
     "@types/mongoose": "^5.11.97",
     "adminjs": "^6.7.2",
     "aws-sdk": "^2.1282.0",
@@ -38,6 +38,7 @@
     "express-rate-limit": "^6.7.0",
     "helmet": "^6.0.1",
     "jsonwebtoken": "^9.0.0",
+    "module-alias": "^2.2.2",
     "mongodb": "^4.13.0",
     "mongoose": "^6.8.2",
     "multer": "^1.4.5-lts.1",
@@ -45,5 +46,9 @@
     "xss-clean": "^0.1.1",
     "zod": "^3.20.2",
     "zod-express-middleware": "^1.4.0"
+  },
+  "_moduleAliases": {
+    "@posts": "src/application/posts",
+    "@user": "src/application/users"
   }
 }

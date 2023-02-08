@@ -1,5 +1,5 @@
 import { Model, model, Schema } from 'mongoose'
-import { IUserToken } from "../../../../domain/models/UserToken"
+import { IUserToken } from "@user/domain/models/UserToken"
 
 const UserTokenSchema: Schema = new Schema<IUserToken, Model<IUserToken>>({
     token: { type: String, required: true, unique: true },

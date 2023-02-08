@@ -1,7 +1,6 @@
 import AdminJS from 'adminjs'
 import AdminJSExpress from '@adminjs/express'
-import { Post } from '../../../application/posts/domain/models/Post'
-import { PostModel } from '../../../application/posts/infra/database/mongoDB/models/Post.schema'
+import { PostModel } from '@posts/infra/database/mongoDB/models/Post.schema'
 import mongoose from 'mongoose'
 import * as AdminJSMongoose from '@adminjs/mongoose'
 

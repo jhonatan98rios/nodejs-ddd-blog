@@ -1,5 +1,5 @@
-import AppError from "../../../../shared/errors/AppError";
-import { UpdatePostDto } from "../../infra/validation/UpdatePost.dto";
+import AppError from "@shared/errors/AppError";
+import { UpdatePostDto } from "@posts/infra/validation/UpdatePost.dto";
 import { Post } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 

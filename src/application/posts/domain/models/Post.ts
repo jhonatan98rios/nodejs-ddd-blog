@@ -1,5 +1,5 @@
-import { toSnakeCase } from "../../../../shared/utils/toSnakeCase"
-import { CreatePostDto } from "../../infra/validation/CreatePost.dto"
+import { toSnakeCase } from "@shared/utils/toSnakeCase"
+import { CreatePostDto } from "@posts/infra/validation/CreatePost.dto"
 import { Category } from "./Category"
 import { Image } from "./Image"
 

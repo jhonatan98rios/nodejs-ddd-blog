@@ -1,7 +1,7 @@
 import { Secret, verify } from 'jsonwebtoken';
-import { generateHash } from '../../../../shared/utils/hash';
-import authConfig from '../../../../adapters/auth/config'
-import AppError from "../../../../shared/errors/AppError";
+import { generateHash } from '@shared/utils/hash';
+import authConfig from '@adapters/auth/config'
+import AppError from "@shared/errors/AppError";
 import { Roles, User } from '../models/User';
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository";
 

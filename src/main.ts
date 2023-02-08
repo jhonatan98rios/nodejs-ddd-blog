@@ -1,3 +1,4 @@
+import 'module-alias/register'
 import Database from './adapters/database/MongoDB/connection'
 import { Server } from './adapters/http/server'
 import * as dotenv from 'dotenv' 

@@ -2,10 +2,11 @@ import aws, { S3 } from 'aws-sdk';
 import { uploadConfig } from './config';
 
 import * as dotenv from 'dotenv'
+import { AbstractCloudStorageProvider } from 'application/posts/domain/providers/AbstractStorageProvider';
 dotenv.config()
 
-export default class S3StorageProvider {
-  private client: S3
+export default class S3StorageProvider implements AbstractCloudStorageProvider<S3> {
+  public client: S3
   public destination: string
 
   constructor() {

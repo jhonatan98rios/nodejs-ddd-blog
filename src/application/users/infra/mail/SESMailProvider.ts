@@ -1,9 +1,8 @@
-import { AbstractMailProvider } from '../../application/users/domain/repositories/AbstractMailProvider';
 import aws, { SES } from 'aws-sdk';
-
+import AppError from '@shared/errors/AppError';
+import { AbstractMailProvider } from '@user/domain/repositories/AbstractMailProvider';
 
 import * as dotenv from 'dotenv'
-import AppError from '../../shared/errors/AppError';
 dotenv.config()
 
 export interface ISendMail {

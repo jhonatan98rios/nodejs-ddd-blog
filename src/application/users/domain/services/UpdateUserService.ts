@@ -1,6 +1,6 @@
-import AppError from "../../../../shared/errors/AppError"
-import { generateHash } from "../../../../shared/utils/hash"
-import { UpdateUserDto } from "../../infra/validation/UpdateUser.dto"
+import AppError from "@shared/errors/AppError"
+import { generateHash } from "@shared/utils/hash"
+import { UpdateUserDto } from "@user/infra/validation/UpdateUser.dto"
 import { User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 

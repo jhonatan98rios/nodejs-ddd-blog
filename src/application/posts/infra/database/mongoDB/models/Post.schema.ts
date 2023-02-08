@@ -1,5 +1,5 @@
 import { Model, model, Schema } from 'mongoose';
-import { IPost } from '../../../../domain/models/Post';
+import { IPost } from '@posts/domain/models/Post';
 import { CategorySchema } from './Category.schema';
 import { ImageSchema } from './Image.schema'
 

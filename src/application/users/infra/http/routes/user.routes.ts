@@ -5,8 +5,8 @@ import { CreateSession } from "../../validation/CreateSession.dto";
 import { UserController } from "../controllers/UserController";
 import { UpdateUser } from "../../validation/UpdateUser.dto";
 import { UpdateUserRole } from "../../validation/UpdateUserRole.dto";
-import { useAuthentication } from "../../../../../adapters/http/middlewares/useAuthentication";
-import { useAuthorization } from "../../../../../adapters/http/middlewares/useAuthorization";
+import { useAuthentication } from "@adapters/http/middlewares/useAuthentication";
+import { useAuthorization } from "@adapters/http/middlewares/useAuthorization";
 import { ResetPasswordValidation } from "../../validation/ResetPassword.dto";
 
 const userRouter = Router()

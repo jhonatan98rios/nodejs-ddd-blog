@@ -1,6 +1,6 @@
 import { Secret, sign } from 'jsonwebtoken';
-import authConfig from '../../../../adapters/auth/config'
-import AppError from "../../../../shared/errors/AppError";
+import authConfig from '@adapters/auth/config'
+import AppError from "@shared/errors/AppError";
 import { AbstractMailProvider } from '../repositories/AbstractMailProvider';
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository";
 
@@ -38,6 +38,6 @@ export class ForgotPasswordService {
             body: `<p> Acesse esse link para recuperar sua senha: ${link} </p>`,
         })
 
-        return link
+        return mail
     }
 }

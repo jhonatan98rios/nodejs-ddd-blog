@@ -1,4 +1,4 @@
-import AppError from "../../../../shared/errors/AppError"
+import AppError from "@shared/errors/AppError"
 import { IUser } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 

@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
-import { UpdateUserService } from '../../../../../application/users/domain/services/UpdateUserService';
-import { ReadAllUsersService } from '../../../../../application/users/domain/services/ReadAllUsersService';
-import { CheckInSessionService } from '../../../domain/services/CheckInSessionService';
-import { CreateSessionService } from '../../../domain/services/CreateSessionService';
-import { CreateUserService } from '../../../domain/services/CreateUserService';
-import { ReadOneUserService } from '../../../domain/services/ReadOneUserService';
-import { MongoDBUserRepository } from '../../database/mongoDB/repositories/UserRepository';
-import { MongoDBUserTokenRepository } from '../../database/mongoDB/repositories/UserTokenRepository';
-import { UpdateUserRoleService } from '../../../../../application/users/domain/services/UpdateUserRoleService';
-import { LogoutSessionService } from '../../../../../application/users/domain/services/LogoutSessionService';
-import { ForgotPasswordService } from '../../../../../application/users/domain/services/ForgotPasswordService';
-import { ResetPasswordService } from '../../../../../application/users/domain/services/ResetPasswordService';
-import SESMailProvider from '../../../../../adapters/mail/SESMailProvider';
+import { UpdateUserService } from '@user/domain/services/UpdateUserService';
+import { ReadAllUsersService } from '@user/domain/services/ReadAllUsersService';
+import { CheckInSessionService } from '@user/domain/services/CheckInSessionService';
+import { CreateSessionService } from '@user/domain/services/CreateSessionService';
+import { CreateUserService } from '@user/domain/services/CreateUserService';
+import { ReadOneUserService } from '@user/domain/services/ReadOneUserService';
+import { MongoDBUserRepository } from '@user/infra/database/mongoDB/repositories/UserRepository';
+import { MongoDBUserTokenRepository } from '@user/infra/database/mongoDB/repositories/UserTokenRepository';
+import { UpdateUserRoleService } from '@user/domain/services/UpdateUserRoleService';
+import { LogoutSessionService } from '@user/domain/services/LogoutSessionService';
+import { ForgotPasswordService } from '@user/domain/services/ForgotPasswordService';
+import { ResetPasswordService } from '@user/domain/services/ResetPasswordService';
+import SESMailProvider from '@user/infra/mail/SESMailProvider';
 
 export class UserController {
 

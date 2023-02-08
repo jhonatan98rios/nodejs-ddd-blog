@@ -1,5 +1,5 @@
 import { Model, Schema } from 'mongoose';
-import { Image } from '../../../../domain/models/Image';
+import { Image } from '@posts/domain/models/Image';
 
 export const ImageSchema: Schema = new Schema<Image, Model<Image>>({
     src: { type: String, required: false },
