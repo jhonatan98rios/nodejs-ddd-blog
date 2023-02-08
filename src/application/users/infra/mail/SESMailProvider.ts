@@ -14,7 +14,7 @@ export interface ISendMail {
 
 
 class SESMailProvider implements AbstractMailProvider {
-  private client: SES
+  public client: SES
 
   constructor() {
     this.client = new aws.SES({

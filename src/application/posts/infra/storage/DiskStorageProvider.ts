@@ -1,7 +1,7 @@
-import { uploadConfig } from './config';
 import fs from 'fs';
 import path from 'path';
-import { AbstractStorageProvider } from '../../domain/providers/AbstractStorageProvider';
+import { uploadConfig } from './config';
+import { AbstractStorageProvider } from '@posts/domain/providers/AbstractStorageProvider';
 
 export default class DiskStorageProvider implements AbstractStorageProvider {
 
