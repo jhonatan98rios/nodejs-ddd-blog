@@ -7,6 +7,7 @@ import { UpdateUser } from "../../validation/UpdateUser.dto";
 import { UpdateUserRole } from "../../validation/UpdateUserRole.dto";
 import { useAuthentication } from "../../../../../adapters/http/middlewares/useAuthentication";
 import { useAuthorization } from "../../../../../adapters/http/middlewares/useAuthorization";
+import { ResetPasswordValidation } from "../../validation/ResetPassword.dto";
 
 const userRouter = Router()
 const userController = new UserController()
@@ -48,6 +49,15 @@ userRouter.put('/role/:username',
 
 userRouter.delete('/logout/:username',
     userController.logout
+)
+
+userRouter.post('/forgot-password',
+    userController.forgotPassword
+)
+
+userRouter.post('/reset-password',
+    validateRequest({body: ResetPasswordValidation}),
+    userController.resetPassword
 )
 
 export default userRouter

@@ -9,6 +9,9 @@ import { MongoDBUserRepository } from '../../database/mongoDB/repositories/UserR
 import { MongoDBUserTokenRepository } from '../../database/mongoDB/repositories/UserTokenRepository';
 import { UpdateUserRoleService } from '../../../../../application/users/domain/services/UpdateUserRoleService';
 import { LogoutSessionService } from '../../../../../application/users/domain/services/LogoutSessionService';
+import { ForgotPasswordService } from '../../../../../application/users/domain/services/ForgotPasswordService';
+import { ResetPasswordService } from '../../../../../application/users/domain/services/ResetPasswordService';
+import SESMailProvider from '../../../../../adapters/mail/SESMailProvider';
 
 export class UserController {
 
@@ -120,5 +123,34 @@ export class UserController {
         
         await logoutService.execute(username)
         return response.status(202).send()
+    }
+
+
+    public async forgotPassword(request: Request, response: Response): Promise<Response> {
+
+        const { mail } = request.body
+
+        const userRepository = new MongoDBUserRepository()
+        const mailProvider = new SESMailProvider()
+
+        const forgotPasswordService = new ForgotPasswordService(userRepository, mailProvider)
+
+        const result = await forgotPasswordService.execute(mail)
+        return response.json(result)
+    }
+
+
+    public async resetPassword(request: Request, response: Response): Promise<Response> {
+
+        const { mail, token, password, passwordConfirmation } = request.body
+
+        const userRepository = new MongoDBUserRepository()
+        const resetPasswordService = new ResetPasswordService(userRepository)
+
+        const updatedUser = await resetPasswordService.execute({ 
+            mail, token, password, passwordConfirmation 
+        })
+
+        return response.json(updatedUser)
     }
 }

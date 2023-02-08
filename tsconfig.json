@@ -9,7 +9,7 @@
     "strict": true,
     "noImplicitAny": true,
     "strictPropertyInitialization": false,
-    "baseUrl": "./",
+    "baseUrl": "./src/",
     "typeRoots": [
       "src/@types",
       "./node_modules/@types"
