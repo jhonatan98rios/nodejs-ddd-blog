@@ -8,6 +8,14 @@ const UserSchema: Schema = new Schema<IUser, Model<IUser>>({
     role: { type: String, required: true, unique: false },
 })
 
+UserSchema.methods.toJSON = function(){
+    let obj = this.toObject()
+    delete obj.password
+    delete obj.__v
+    delete obj._id
+    return obj
+}
+
 export type IUserModel = Model<IUser>
 
 export class UserModel {

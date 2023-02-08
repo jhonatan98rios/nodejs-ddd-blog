@@ -12,13 +12,11 @@ import { rateLimiter } from '../middlewares/useRateLimit';
 import Database from '../../database/MongoDB/connection';
 
 import swaggerDocs from './swagger.json'
-import { AdminPanel } from '../admin';
 import mongoose from 'mongoose';
 
 
 interface IServer {
-    database: Database,
-    adminPanel: AdminPanel
+    database: Database
 }
 
 export class Server {
@@ -43,13 +41,8 @@ export class Server {
         this.app.use('/uploads', express.static('uploads'))           
     }
     
-    
-    public async connect({ database, adminPanel }: IServer) {
+    public async connect({ database }: IServer) {
         this.connection = await database.connect()
-    
-        if (this.connection) {
-            this.app.use(...adminPanel.connect(this.connection))
-        }
     }
 
     public listen(port: number) {
