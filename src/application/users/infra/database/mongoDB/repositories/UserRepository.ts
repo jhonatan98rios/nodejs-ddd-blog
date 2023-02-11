@@ -1,6 +1,6 @@
-import { IUser } from "@user/domain/models/User";
-import { AbstractUserRepository } from "@user/domain/repositories/AbstractUserRepository";
-import { UpdateUserDto } from "@user/infra/validation/UpdateUser.dto";
+import { IUser } from "@users/domain/models/User";
+import { AbstractUserRepository } from "@users/domain/repositories/AbstractUserRepository";
+import { UpdateUserDto } from "@users/infra/validation/UpdateUser.dto";
 import { IUserModel, UserModel } from "../models/User.schema";
 
 

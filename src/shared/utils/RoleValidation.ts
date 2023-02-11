@@ -1,5 +1,5 @@
 import AppError from "../errors/AppError";
-import { Roles } from "../../application/users/domain/models/User";
+import { Roles } from "@users/domain/models/User";
 
 export function roleValidation(role: string): Roles {
 

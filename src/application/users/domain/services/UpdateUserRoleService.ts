@@ -1,6 +1,6 @@
 import { roleValidation } from "@shared/utils/RoleValidation"
 import AppError from "@shared/errors/AppError"
-import { UpdateUserRoleDto } from "@user/infra/validation/UpdateUserRole.dto"
+import { UpdateUserRoleDto } from "@users/infra/validation/UpdateUserRole.dto"
 import { User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 import { AbstractUserTokenRepository } from "../repositories/AbstractUserTokenRepository"

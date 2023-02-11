@@ -9,7 +9,7 @@ import xss from 'xss-clean'
 import routes from '../routes';
 import { useAppError } from '../middlewares/useAppError'
 import { rateLimiter } from '../middlewares/useRateLimit';
-import Database from '../../database/MongoDB/connection';
+import Database from '@adapters/database/MongoDB/connection';
 
 import swaggerDocs from './swagger.json'
 import mongoose from 'mongoose';

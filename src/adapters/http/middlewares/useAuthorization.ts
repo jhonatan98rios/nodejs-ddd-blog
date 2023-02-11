@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { Roles } from '../../../application/users/domain/models/User';
-import AppError from '../../../shared/errors/AppError';
+import { Roles } from '@users/domain/models/User';
+import AppError from '@shared/errors/AppError';
 
 export function useAuthorization(requiredRole: string) {
     return function(request: Request, response: Response, next: NextFunction) {

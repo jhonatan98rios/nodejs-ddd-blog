@@ -1,6 +1,6 @@
 import AppError from "@shared/errors/AppError";
-import { IUserToken } from "@user/domain/models/UserToken";
-import { AbstractUserTokenRepository } from "@user/domain/repositories/AbstractUserTokenRepository";
+import { IUserToken } from "@users/domain/models/UserToken";
+import { AbstractUserTokenRepository } from "@users/domain/repositories/AbstractUserTokenRepository";
 import { IUserTokenModel, UserTokenModel } from "../models/UserToken.schema";
 
 

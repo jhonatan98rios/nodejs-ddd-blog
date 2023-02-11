@@ -46,6 +46,6 @@
   },
   "_moduleAliases": {
     "@posts": "src/application/posts",
-    "@user": "src/application/users"
+    "@users": "src/application/users"
   }
 }

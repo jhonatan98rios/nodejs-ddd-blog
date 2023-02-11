@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { validateRequest } from "zod-express-middleware";
-import { CreateUser } from "../../validation/CreateUser.dto";
-import { CreateSession } from "../../validation/CreateSession.dto";
-import { UserController } from "../controllers/UserController";
-import { UpdateUser } from "../../validation/UpdateUser.dto";
-import { UpdateUserRole } from "../../validation/UpdateUserRole.dto";
+import { CreateUser } from "@users/infra/validation/CreateUser.dto";
+import { CreateSession } from "@users/infra/validation/CreateSession.dto";
+import { UserController } from "@users/infra/http/controllers/UserController";
+import { UpdateUser } from "@users/infra/validation/UpdateUser.dto";
+import { UpdateUserRole } from "@users/infra/validation/UpdateUserRole.dto";
 import { useAuthentication } from "@adapters/http/middlewares/useAuthentication";
 import { useAuthorization } from "@adapters/http/middlewares/useAuthorization";
-import { ResetPasswordValidation } from "../../validation/ResetPassword.dto";
+import { ResetPasswordValidation } from "@users/infra/validation/ResetPassword.dto";
 
 const userRouter = Router()
 const userController = new UserController()

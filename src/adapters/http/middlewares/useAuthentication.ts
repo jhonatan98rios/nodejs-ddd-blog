@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import AppError from '../../../shared/errors/AppError';
-import { isAuthenticated } from '../../auth/isAuthenticated';
+import AppError from '@shared/errors/AppError';
+import { isAuthenticated } from '@adapters/auth/isAuthenticated';
 
 export function useAuthentication(
     request: Request,

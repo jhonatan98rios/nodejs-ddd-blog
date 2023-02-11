@@ -2,7 +2,7 @@ import authConfig from '@adapters/auth/config'
 import { sign, Secret } from 'jsonwebtoken';
 import AppError from "@shared/errors/AppError";
 import { compareHash } from "@shared/utils/hash";
-import { CreateSessionDto } from "@user/infra/validation/CreateSession.dto";
+import { CreateSessionDto } from "@users/infra/validation/CreateSession.dto";
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository";
 import { AbstractUserTokenRepository } from '../repositories/AbstractUserTokenRepository';
 import { UserToken } from '../models/UserToken';

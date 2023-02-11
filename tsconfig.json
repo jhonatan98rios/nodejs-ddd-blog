@@ -12,7 +12,7 @@
     "baseUrl": "./",
     "paths": {
       "@posts/*": ["src/application/posts/*"],
-      "@user/*": ["src/application/users/*"],
+      "@users/*": ["src/application/users/*"],
       "@shared/*": ["src/shared/*"],
       "@adapters/*": ["src/adapters/*"]
     },

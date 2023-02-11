@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import postRouter from '../../../application/posts/infra/http/routes/post.routes';
-import userRouter from '../../../application/users/infra/http/routes/user.routes';
+import postRouter from '@posts/infra/http/routes/post.routes';
+import userRouter from '@users/infra/http/routes/user.routes';
 
 const routes = Router();
 

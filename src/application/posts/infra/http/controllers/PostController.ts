@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import DiskStorageProvider from '../../storage/DiskStorageProvider';
+import DiskStorageProvider from '@posts/infra/storage/DiskStorageProvider';
 import S3StorageProvider from '@posts/infra/storage/S3StorageProvider';
 import { CreatePostService } from "@posts/domain/services/CreatePostService"
 import { DeletePostService } from '@posts/domain/services/DeletePostService';

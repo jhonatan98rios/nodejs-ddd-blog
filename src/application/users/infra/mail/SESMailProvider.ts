@@ -1,6 +1,6 @@
 import aws, { SES } from 'aws-sdk';
 import AppError from '@shared/errors/AppError';
-import { AbstractMailProvider } from '@user/domain/repositories/AbstractMailProvider';
+import { AbstractMailProvider } from '@users/domain/repositories/AbstractMailProvider';
 
 import * as dotenv from 'dotenv'
 dotenv.config()

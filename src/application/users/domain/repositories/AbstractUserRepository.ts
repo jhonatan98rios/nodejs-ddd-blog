@@ -1,5 +1,5 @@
-import { CreateUserDto } from "@user/infra/validation/CreateUser.dto";
-import { UpdateUserDto } from "@user/infra/validation/UpdateUser.dto";
+import { CreateUserDto } from "@users/infra/validation/CreateUser.dto";
+import { UpdateUserDto } from "@users/infra/validation/UpdateUser.dto";
 import { IUser } from "../models/User";
 
 export abstract class AbstractUserRepository {
