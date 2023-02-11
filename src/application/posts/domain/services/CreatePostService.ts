@@ -24,7 +24,7 @@ export class CreatePostService {
         const alreadyExists = await this.postRepository.readOne(post.slug)
 
         if (alreadyExists) {
-            throw new AppError('This title is already being used', 409)
+            throw new AppError('Esse título já esta sendo utilizado em outro post', 409)
         }
 
         await this.postRepository.create(post.props)

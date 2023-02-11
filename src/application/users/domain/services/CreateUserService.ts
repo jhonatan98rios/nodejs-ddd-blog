@@ -18,7 +18,13 @@ export class CreateUserService {
         const userAlreadyExists = await this.userRepository.readOne(user)
 
         if (userAlreadyExists) {
-            throw new AppError('This user already exists', 409)
+            throw new AppError('Esse nome de usuário já esta sendo utilizado por outro usuário', 409)
+        }
+
+        const mailAlreadyExists = await this.userRepository.readOneByMail(mail)
+
+        if (mailAlreadyExists) {
+            throw new AppError('Esse e-mail já esta sendo utilizado por outro usuário', 409)
         }
 
         const hashedPassword = await generateHash(password)

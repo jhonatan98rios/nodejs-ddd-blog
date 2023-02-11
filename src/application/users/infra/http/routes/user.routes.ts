@@ -8,6 +8,7 @@ import { UpdateUserRole } from "@users/infra/validation/UpdateUserRole.dto";
 import { useAuthentication } from "@adapters/http/middlewares/useAuthentication";
 import { useAuthorization } from "@adapters/http/middlewares/useAuthorization";
 import { ResetPasswordValidation } from "@users/infra/validation/ResetPassword.dto";
+import { ForgotPasswordValidation } from "@users/infra/validation/ForgotPassword.dto";
 
 const userRouter = Router()
 const userController = new UserController()
@@ -52,6 +53,7 @@ userRouter.delete('/logout/:username',
 )
 
 userRouter.post('/forgot-password',
+    validateRequest({body: ForgotPasswordValidation}),
     userController.forgotPassword
 )
 

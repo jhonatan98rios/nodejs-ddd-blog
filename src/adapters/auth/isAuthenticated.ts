@@ -19,6 +19,6 @@ export function isAuthenticated(authHeader: string) {
     return { sub, role }
 
   } catch {
-    throw new AppError('Invalid JWT Token.');
+    throw new AppError('Falha ao autenticar o usuário');
   }
 }

@@ -8,11 +8,11 @@ export function useAuthorization(requiredRole: string) {
         const { role } = request.user
 
         if (!Object.values(Roles).includes(role as Roles)) {
-            throw new AppError('Invalid role');
+            throw new AppError('O usuário não tem permissão de realizar essa operação');
         }
 
         if (!isAuthorized(requiredRole, role)) {
-            throw new AppError('The user does not meet the minimum permissions');
+            throw new AppError('O usuário não tem permissão de realizar essa operação');
         }
 
         return next()
@@ -28,7 +28,7 @@ function isAuthorized(requiredRole: string, userRole: string) {
         : false
 
     if (!isAuthorized) {
-        throw new AppError('The user does not meet the minimum permissions');
+        throw new AppError('O usuário não tem permissão de realizar essa operação');
     }
 
     console.log('userRole: ', userRole)

@@ -25,7 +25,7 @@ export class CreateSessionService {
         const findedUser = await this.userRepository.readOne(user)
 
         if (!findedUser) {
-            throw new AppError('Incorrect email/password combination.', 401);
+            throw new AppError('Usuário ou senha incorretos', 401);
         }
 
         const passwordConfirmed = await compareHash(
@@ -34,7 +34,7 @@ export class CreateSessionService {
         )
 
         if (!passwordConfirmed) {
-            throw new AppError('Incorrect email/password combination.', 401);
+            throw new AppError('Usuário ou senha incorretos', 401);
         }
 
         const payload = {

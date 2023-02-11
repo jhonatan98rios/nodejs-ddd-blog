@@ -16,7 +16,7 @@ export class ForgotPasswordService {
         const findedUser = await this.userRepository.readOneByMail(mail)
 
         if (!findedUser) {
-            throw new AppError('User does not exists.');
+            throw new AppError(`O email ${mail} não foi encontrado`, 404)
         }
 
         const payload = {
@@ -31,13 +31,13 @@ export class ForgotPasswordService {
         const token = sign(payload, authConfig.jwt.secret as Secret, options)
         const link = `http://localhost:3000/reset-password/${findedUser.mail}/${token}`
 
-        await this.mailProvider.sendMail({
+        /* await this.mailProvider.sendMail({
             from: 'jhonatan.dev.rios@gmail.com',
             to: mail,
             subject: 'Recuperação de senha',
             body: `<p> Acesse esse link para recuperar sua senha: ${link} </p>`,
-        })
+        }) */
 
-        return mail
+        return link
     }
 }

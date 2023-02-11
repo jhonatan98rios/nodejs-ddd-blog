@@ -16,7 +16,7 @@ export class UpdatePostService {
         const post = await this.postRepository.readOne(slug)
         
         if (!post) {
-            throw new AppError('Post not found', 404)
+            throw new AppError('Post não encontrado', 404)
         }
 
         const { title, subtitle, content, categories, createdAt, banner, 

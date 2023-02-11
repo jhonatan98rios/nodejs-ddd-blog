@@ -37,7 +37,7 @@ export class UploadPostService {
         const post = await this.props.postRepository.readOne(slug)
         
         if (!post) {
-            throw new AppError('Post not found', 404)
+            throw new AppError('Post não encontrado', 404)
         }
 
         const imagePath = path.join(file.destination, file.filename)

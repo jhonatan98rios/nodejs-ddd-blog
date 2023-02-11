@@ -13,7 +13,7 @@ export class ReadAllUsersService {
     async execute(): Promise<ReadOneUserResponse> {
         const users = await this.userRepository.readAll()
         if (!users) {
-            throw new AppError('No user found', 404)
+            throw new AppError('Nenhum usuário encontrado', 404)
         }
         return { users: users }
     }

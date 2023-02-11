@@ -13,7 +13,7 @@ export class LogoutSessionService {
         const userAlreadyExists = await this.userRepository.readOne(username)
 
         if (!userAlreadyExists) {
-            throw new AppError(`The user ${username} did not exists`, 404)
+            throw new AppError(`O usuário ${username} não foi encontrado`, 404)
         }
 
         await this.userTokenRepository.delete(username)

@@ -12,13 +12,17 @@ export class UpdateUserService {
     constructor(private userRepository: AbstractUserRepository) {}
 
     async execute({
-        username, password
+        username, password, passwordConfirmation
     }: UpdateUserDto): Promise<UpdateUserResponse> {
+
+        if (password != passwordConfirmation) {
+            throw new AppError(`O campo confirmação de senha precisa ser igual ao campo senha`);
+        }
 
         const userAlreadyExists = await this.userRepository.readOne(username)
 
         if (!userAlreadyExists) {
-            throw new AppError(`The user ${username} did not exists`, 404)
+            throw new AppError(`O usuário ${username} não foi encontrado`, 404)
         }
 
         const hashedPassword = await generateHash(password)

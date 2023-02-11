@@ -34,13 +34,13 @@ export class ResetPasswordService {
     }: IResetPasswordService): Promise<ResetPasswordResponse> {
 
         if (password != passwordConfirmation) {
-            throw new AppError(`Password does not match password confirmation`);
+            throw new AppError(`O campo confirmação de senha precisa ser igual ao campo senha`);
         }
         
         const findedUser = await this.userRepository.readOneByMail(mail)
 
         if (!findedUser) {
-            throw new AppError('User does not exists.');
+            throw new AppError(`O email ${mail} não foi encontrado`, 404)
         }
 
         try {
@@ -48,11 +48,11 @@ export class ResetPasswordService {
             const payload = decodedToken as ITokenPayload
 
             if (payload.mail != mail) {
-                throw new AppError(`Token does not match user: ${findedUser.user}`);
+                throw new AppError('Falha ao autenticar o usuário');
             }
 
             if (payload.password != findedUser.password) {
-                throw new AppError(`Invalid JWT Token.`);
+                throw new AppError('Falha ao autenticar o usuário');
             }
 
             const hashedPassword = await generateHash(password)
@@ -69,7 +69,7 @@ export class ResetPasswordService {
             return { user: updatedUser }
 
         } catch {
-            throw new AppError('Invalid JWT Token.');
+            throw new AppError('Falha ao autenticar o usuário');
         }
     }
 }

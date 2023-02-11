@@ -11,7 +11,7 @@ export function useAuthentication(
     const authHeader = request.headers.authorization
 
     if (!authHeader) {
-        throw new AppError('JWT Token is missing.')
+        throw new AppError('Falha ao autenticar o usuário');
     }
 
     const { sub, role } = isAuthenticated(authHeader)

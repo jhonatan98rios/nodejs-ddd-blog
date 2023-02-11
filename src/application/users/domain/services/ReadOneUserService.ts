@@ -15,7 +15,7 @@ export class ReadOneUserService {
         const findedUser = await this.userRepository.readOne(user)
 
         if (!findedUser) {
-            throw new AppError('User not found', 404)
+            throw new AppError(`O usuário ${user} não foi encontrado`, 404)
         }
 
         return { user: findedUser }

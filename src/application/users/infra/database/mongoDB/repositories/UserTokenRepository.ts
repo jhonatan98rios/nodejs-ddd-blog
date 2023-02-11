@@ -16,7 +16,7 @@ export class MongoDBUserTokenRepository implements AbstractUserTokenRepository {
         const userToken = await this.userTokenModel.findOne({ token })
 
         if (!userToken) {
-            throw new AppError("Invalid token")
+            throw new AppError('Falha ao autenticar o usuário');
         }
 
         return userToken
