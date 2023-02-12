@@ -1,8 +1,9 @@
-import { uploadConfig } from './config';
 import fs from 'fs';
 import path from 'path';
+import { uploadConfig } from './config';
+import { AbstractStorageProvider } from '@posts/domain/providers/AbstractStorageProvider';
 
-export default class DiskStorageProvider {
+export default class DiskStorageProvider implements AbstractStorageProvider {
 
   /**
   * Remove the image of Localdisk

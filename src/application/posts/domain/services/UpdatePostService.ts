@@ -1,5 +1,5 @@
-import AppError from "../../../../shared/errors/AppError";
-import { UpdatePostDto } from "../../infra/validation/UpdatePost.dto";
+import AppError from "@shared/errors/AppError";
+import { UpdatePostDto } from "@posts/infra/validation/UpdatePost.dto";
 import { Post } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 
@@ -16,10 +16,11 @@ export class UpdatePostService {
         const post = await this.postRepository.readOne(slug)
         
         if (!post) {
-            throw new AppError('Post not found', 404)
+            throw new AppError('Post não encontrado', 404)
         }
 
-        const { title, subtitle, content, categories, createdAt, banner, seo_title, seo_description, seo_keywords } = post
+        const { title, subtitle, content, categories, createdAt, banner, 
+            seo_title, seo_description, seo_keywords, status, language  } = post
         
         const updatedPost = new Post({
             title: updatePostDto.title ?? title, 
@@ -30,7 +31,9 @@ export class UpdatePostService {
             banner: updatePostDto.banner ?? banner, 
             seo_title: updatePostDto.seo_title ?? seo_title, 
             seo_description: updatePostDto.seo_description ?? seo_description, 
-            seo_keywords: updatePostDto.seo_keywords ?? seo_keywords
+            seo_keywords: updatePostDto.seo_keywords ?? seo_keywords,
+            status: updatePostDto.status ?? status,
+            language: updatePostDto.language ?? language
         })
 
         await this.postRepository.update(slug, updatedPost.props)

@@ -1,10 +1,10 @@
 import fs from 'fs'
-import S3StorageProvider from "../../../../adapters/storage/S3StorageProvider";
-import AppError from "../../../../shared/errors/AppError";
-import { ImageProps, Image } from "../models/Image";
+import S3StorageProvider from "@posts/infra/storage/S3StorageProvider";
+import AppError from "@shared/errors/AppError";
+import { Image } from "../models/Image";
 import { Post } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
-import DiskStorageProvider from "../../../../adapters/storage/DiskStorageProvider";
+import DiskStorageProvider from "@posts/infra/storage/DiskStorageProvider";
 import path from 'path';
 
 type UpdatePostResponse = {
@@ -37,7 +37,7 @@ export class UploadPostService {
         const post = await this.props.postRepository.readOne(slug)
         
         if (!post) {
-            throw new AppError('Post not found', 404)
+            throw new AppError('Post não encontrado', 404)
         }
 
         const imagePath = path.join(file.destination, file.filename)
@@ -56,10 +56,12 @@ export class UploadPostService {
             size: file.size
         })
 
-        const { title, subtitle, content, categories, createdAt, seo_title, seo_description, seo_keywords } = post
+        const { title, subtitle, content, categories, createdAt, status, language,
+            seo_title, seo_description, seo_keywords } = post
         
         const updatedPost = new Post({
-            title, subtitle, content, categories, createdAt, banner, seo_title, seo_description, seo_keywords
+            title, subtitle, content, categories, createdAt, banner, status, language,
+            seo_title, seo_description, seo_keywords
         })
 
         await this.props.postRepository.update(slug, updatedPost.props)

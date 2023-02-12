@@ -1,6 +1,5 @@
 import { addHours, isAfter } from "date-fns";
-import AppError from "../../../../shared/errors/AppError";
-import { CreateSessionDto } from "../../infra/validation/CreateSession.dto";
+import AppError from "@shared/errors/AppError";
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository";
 import { AbstractUserTokenRepository } from "../repositories/AbstractUserTokenRepository";
 
@@ -22,19 +21,19 @@ export class CheckInSessionService {
         const userToken = await this.userTokenRepository.findByToken(token)
 
         if (!userToken) {
-            throw new AppError('User Token does not exists.');
+            throw new AppError('Falha ao autenticar o usuário');
         }
 
         const user = await this.userRepository.readOne(userToken.user)
 
         if (!user) {
-            throw new AppError('User does not exists.');
+            throw new AppError('Falha ao autenticar o usuário');
         }
 
         const compare = addHours(userToken.created_at, 2)
 
         if (isAfter(Date.now(), compare)) {
-            throw new AppError('Token expired.');
+            throw new AppError('Falha ao autenticar o usuário');
         }
 
         return {

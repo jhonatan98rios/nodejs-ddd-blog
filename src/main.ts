@@ -1,18 +1,17 @@
+import 'module-alias/register'
 import Database from './adapters/database/MongoDB/connection'
 import { Server } from './adapters/http/server'
-import * as dotenv from 'dotenv' 
-import { AdminPanel } from './adapters/http/admin'
+import * as dotenv from 'dotenv'
 
 dotenv.config()
 
 const database = new Database({
     user: process.env.DATABASE_USER!,
-    password: process.env.DATABASE_PASS!
+    password: process.env.DATABASE_PASS!,
+    collection: process.env.DATABASE_NAME!,
 })
-
-const adminPanel = new AdminPanel()
 
 const server = new Server()
 
-server.connect({ database, adminPanel })
+server.connect({ database })
 server.listen(3333)

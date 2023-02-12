@@ -1,16 +1,18 @@
-import aws, { S3 } from 'aws-sdk';
-import { uploadConfig } from './config';
-
 import * as dotenv from 'dotenv'
+import aws, { S3 } from 'aws-sdk'
+
+import { uploadConfig } from './config'
+import { AbstractCloudStorageProvider } from '@posts/domain/providers/AbstractStorageProvider'
+
 dotenv.config()
 
-export default class S3StorageProvider {
-  private client: S3
+export default class S3StorageProvider implements AbstractCloudStorageProvider {
+  public client: S3
   public destination: string
 
   constructor() {
     this.client = new aws.S3({
-      region: 'sa-east-1',
+      region: process.env.AWS_REGION,
     })
     this.destination = process.env.BUCKET_PATH as string
   }

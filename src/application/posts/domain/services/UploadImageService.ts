@@ -1,7 +1,7 @@
 import fs from 'fs'
-import S3StorageProvider from "../../../../adapters/storage/S3StorageProvider";
-import { ImageProps, Image } from "../models/Image";
-import DiskStorageProvider from "../../../../adapters/storage/DiskStorageProvider";
+import { Image } from "../models/Image";
+import S3StorageProvider from "@posts/infra/storage/S3StorageProvider";
+import DiskStorageProvider from "@posts/infra/storage/DiskStorageProvider";
 import path from 'path';
 
 type UpdateImageResponse = {

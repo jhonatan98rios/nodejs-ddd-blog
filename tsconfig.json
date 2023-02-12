@@ -10,6 +10,12 @@
     "noImplicitAny": true,
     "strictPropertyInitialization": false,
     "baseUrl": "./",
+    "paths": {
+      "@posts/*": ["src/application/posts/*"],
+      "@users/*": ["src/application/users/*"],
+      "@shared/*": ["src/shared/*"],
+      "@adapters/*": ["src/adapters/*"]
+    },
     "typeRoots": [
       "src/@types",
       "./node_modules/@types"

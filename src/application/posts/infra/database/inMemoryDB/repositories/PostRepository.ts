@@ -1,5 +1,5 @@
-import { IPost } from "../../../../domain/models/Post"
-import { AbstractPostRepository } from "../../../../domain/repositories/AbstractPostRepository";
+import { IPost } from "@posts/domain/models/Post"
+import { AbstractPostRepository } from "@posts/domain/repositories/AbstractPostRepository";
 
 class _InMemoryPostRepository implements AbstractPostRepository {
     

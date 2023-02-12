@@ -19,7 +19,7 @@ interface IUploadConfig {
 }
 
 const uploadFolder = path.resolve(__dirname, '..', '..', '..', 'uploads');
-const tmpFolder = path.resolve(__dirname, '..', '..', '..', 'temp');
+const tmpFolder = path.resolve(__dirname, '..', '..', '..', '..', '..', 'temp');
 
 export const uploadConfig = {
     driver: process.env.STORAGE_DRIVER,

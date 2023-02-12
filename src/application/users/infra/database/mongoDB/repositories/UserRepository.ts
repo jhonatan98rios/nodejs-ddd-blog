@@ -1,6 +1,6 @@
-import { IUser } from "../../../../domain/models/User";
-import { AbstractUserRepository } from "../../../../domain/repositories/AbstractUserRepository";
-import { UpdateUserDto } from "../../../validation/UpdateUser.dto";
+import { IUser } from "@users/domain/models/User";
+import { AbstractUserRepository } from "@users/domain/repositories/AbstractUserRepository";
+import { UpdateUserDto } from "@users/infra/validation/UpdateUser.dto";
 import { IUserModel, UserModel } from "../models/User.schema";
 
 
@@ -24,6 +24,11 @@ export class MongoDBUserRepository implements AbstractUserRepository {
 
     async readOne(user: string): Promise<IUser | null> {
         const findedUser = await this.userModel.findOne({ user })
+        return findedUser
+    }
+
+    async readOneByMail(mail: string): Promise<IUser | null> {
+        const findedUser = await this.userModel.findOne({ mail })
         return findedUser
     }
 

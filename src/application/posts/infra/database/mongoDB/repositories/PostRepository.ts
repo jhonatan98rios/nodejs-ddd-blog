@@ -1,5 +1,5 @@
-import { IPost } from "../../../../domain/models/Post"
-import { AbstractPostRepository } from "../../../../domain/repositories/AbstractPostRepository";
+import { IPost } from "@posts/domain/models/Post"
+import { AbstractPostRepository } from "@posts/domain/repositories/AbstractPostRepository";
 import { PostModel, IPostModel } from "../models/Post.schema";
 
 export class MongoDBPostRepository implements AbstractPostRepository {
@@ -16,7 +16,7 @@ export class MongoDBPostRepository implements AbstractPostRepository {
     }
 
     async readAll(): Promise<IPost[]> {
-        return await this.postModel.find()
+        return await this.postModel.find().sort({ createdAt: -1 })
     }
 
     async readOne(slug: string): Promise<IPost | null> {

@@ -1,6 +1,6 @@
-import AppError from "../../../../shared/errors/AppError"
-import { generateHash } from "../../../../shared/utils/hash"
-import { CreateUserDto } from "../../infra/validation/CreateUser.dto"
+import AppError from "@shared/errors/AppError"
+import { generateHash } from "@shared/utils/hash"
+import { CreateUserDto } from "@users/infra/validation/CreateUser.dto"
 import { Roles, User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 
@@ -12,19 +12,26 @@ export class CreateUserService {
     constructor(private userRepository: AbstractUserRepository) {}
 
     async execute({
-        user, password
+        user, password, mail
     }: CreateUserDto): Promise<CreateUserResponse> {
 
         const userAlreadyExists = await this.userRepository.readOne(user)
 
         if (userAlreadyExists) {
-            throw new AppError('This user already exists', 409)
+            throw new AppError('Esse nome de usuário já esta sendo utilizado por outro usuário', 409)
+        }
+
+        const mailAlreadyExists = await this.userRepository.readOneByMail(mail)
+
+        if (mailAlreadyExists) {
+            throw new AppError('Esse e-mail já esta sendo utilizado por outro usuário', 409)
         }
 
         const hashedPassword = await generateHash(password)
 
         const createdUser = new User({
-            user, 
+            user,
+            mail,
             role: Roles.READ,
             password: hashedPassword,
         })

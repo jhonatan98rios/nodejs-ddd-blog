@@ -12,6 +12,8 @@ export const CreatePost = zod.object({
     seo_title: zod.string().min(8).trim().optional(),
     seo_description: zod.string().min(8).trim().optional(),
     seo_keywords: zod.string().min(8).trim().optional(),
+    status: zod.string().trim().optional(),
+    language: zod.string().trim()
 })
 
 export type CreatePostDto = zod.infer<typeof CreatePost>

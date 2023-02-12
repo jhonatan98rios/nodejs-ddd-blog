@@ -1,4 +1,4 @@
-import AppError from "../../../../shared/errors/AppError";
+import AppError from "@shared/errors/AppError";
 import { IPost } from "../models/Post";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 
@@ -15,7 +15,7 @@ export class ReadOnePostService {
         const post = await this.postRepository.readOne(slug)
 
         if (!post) {
-            throw new AppError('Post not found', 404)
+            throw new AppError('Post não encontrado', 404)
         }
 
         return { post }

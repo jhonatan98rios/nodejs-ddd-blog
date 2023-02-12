@@ -1,4 +1,4 @@
-import { CheckInDto } from "../../infra/validation/CheckIn.dto";
+import { CheckInDto } from "@users/infra/validation/CheckIn.dto";
 
 export interface IUserToken {
     token: string;

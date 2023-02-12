@@ -1,4 +1,4 @@
-import AppError from "../../../../shared/errors/AppError";
+import AppError from "@shared/errors/AppError";
 import { AbstractPostRepository } from "../repositories/AbstractPostRepository";
 
 type DeletePostResponse = {
@@ -14,7 +14,7 @@ export class DeletePostService {
         const post = await this.postRepository.readOne(slug)
         
         if (!post) {
-            throw new AppError('Post not found', 404)
+            throw new AppError('Post não encontrado', 404)
         }
 
         const deletedPost = await this.postRepository.delete(slug)

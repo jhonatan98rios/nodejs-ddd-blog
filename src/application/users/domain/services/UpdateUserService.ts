@@ -1,7 +1,6 @@
-import AppError from "../../../../shared/errors/AppError"
-import { generateHash } from "../../../../shared/utils/hash"
-import { CreateUserDto } from "../../infra/validation/CreateUser.dto"
-import { UpdateUserDto } from "../../infra/validation/UpdateUser.dto"
+import AppError from "@shared/errors/AppError"
+import { compareHash, generateHash } from "@shared/utils/hash"
+import { UpdateUserDto } from "@users/infra/validation/UpdateUser.dto"
 import { User } from "../models/User"
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository"
 
@@ -13,21 +12,35 @@ export class UpdateUserService {
     constructor(private userRepository: AbstractUserRepository) {}
 
     async execute({
-        username, password
+        username, currentPassword, password, passwordConfirmation
     }: UpdateUserDto): Promise<UpdateUserResponse> {
 
-        const userAlreadyExists = await this.userRepository.readOne(username)
+        if (password != passwordConfirmation) {
+            throw new AppError(`O campo "confirmação de senha" precisa ser igual ao campo senha`);
+        }
 
-        if (!userAlreadyExists) {
-            throw new AppError(`The user ${username} did not exists`, 404)
+        const findedUser = await this.userRepository.readOne(username)
+
+        if (!findedUser) {
+            throw new AppError(`O usuário ${username} não foi encontrado`, 404)
+        }
+
+        const currentPasswordConfirmed = await compareHash(
+            currentPassword, 
+            findedUser.password
+        )
+
+        if (!currentPasswordConfirmed) {
+            throw new AppError('A senha atual informada é invalida', 401);
         }
 
         const hashedPassword = await generateHash(password)
 
         const updatedUser = new User({
-            user: username, 
+            user: username,
+            mail: findedUser.mail,
             password: hashedPassword,
-            role: userAlreadyExists.role
+            role: findedUser.role
         })
 
         await this.userRepository.update(username, updatedUser.props)

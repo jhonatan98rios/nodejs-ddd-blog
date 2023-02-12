@@ -1,5 +1,5 @@
-import { toSnakeCase } from "../../../../shared/utils/toSnakeCase"
-import { CreatePostDto } from "../../infra/validation/CreatePost.dto"
+import { toSnakeCase } from "@shared/utils/toSnakeCase"
+import { CreatePostDto } from "@posts/infra/validation/CreatePost.dto"
 import { Category } from "./Category"
 import { Image } from "./Image"
 
@@ -15,6 +15,8 @@ export interface IPost {
     seo_title: string
     seo_description: string
     seo_keywords: string
+    status: string
+    language: string
 }
 
 export class Post {
@@ -28,7 +30,8 @@ export class Post {
             updatedAt: new Date(),
             seo_title: props.seo_title ?? `Jhonatan Dev Rios | ${props.title}`,
             seo_description: props.seo_description ?? props.subtitle,
-            seo_keywords: props.seo_keywords ?? 'tecnologia'
+            seo_keywords: props.seo_keywords ?? 'tecnologia',
+            status: props.status ?? 'dev'
         }
     }
 
@@ -111,5 +114,21 @@ export class Post {
 
     set seo_keywords(seo_keywords: string) {
         this.seo_keywords = seo_keywords
+    }
+
+    get status(): string {
+        return this.status
+    }
+
+    set status(status: string) {
+        this.status = status
+    }
+
+    get language(): string {
+        return this.language
+    }
+
+    set language(language: string) {
+        this.language = language
     }
 }

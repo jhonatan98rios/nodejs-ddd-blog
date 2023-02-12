@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import AppError from '../../../shared/errors/AppError'
+import AppError from '@shared/errors/AppError'
 
 export function useAppError(error: Error, request: Request, response: Response, next: NextFunction) {
   if (error instanceof AppError) {
@@ -8,8 +8,6 @@ export function useAppError(error: Error, request: Request, response: Response, 
       message: error.message,
     });
   }
-
-  console.log(error);
 
   return response.status(500).json({
     status: 'error',

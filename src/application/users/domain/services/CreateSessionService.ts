@@ -1,8 +1,8 @@
-import authConfig from '../../../../adapters/auth/config'
+import authConfig from '@adapters/auth/config'
 import { sign, Secret } from 'jsonwebtoken';
-import AppError from "../../../../shared/errors/AppError";
-import { compareHash } from "../../../../shared/utils/hash";
-import { CreateSessionDto } from "../../infra/validation/CreateSession.dto";
+import AppError from "@shared/errors/AppError";
+import { compareHash } from "@shared/utils/hash";
+import { CreateSessionDto } from "@users/infra/validation/CreateSession.dto";
 import { AbstractUserRepository } from "../repositories/AbstractUserRepository";
 import { AbstractUserTokenRepository } from '../repositories/AbstractUserTokenRepository';
 import { UserToken } from '../models/UserToken';
@@ -25,7 +25,7 @@ export class CreateSessionService {
         const findedUser = await this.userRepository.readOne(user)
 
         if (!findedUser) {
-            throw new AppError('Incorrect email/password combination.', 401);
+            throw new AppError('Usuário ou senha incorretos', 401);
         }
 
         const passwordConfirmed = await compareHash(
@@ -34,7 +34,7 @@ export class CreateSessionService {
         )
 
         if (!passwordConfirmed) {
-            throw new AppError('Incorrect email/password combination.', 401);
+            throw new AppError('Usuário ou senha incorretos', 401);
         }
 
         const payload = {

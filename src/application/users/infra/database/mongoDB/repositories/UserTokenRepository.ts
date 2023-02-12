@@ -1,9 +1,8 @@
-import { Secret, sign } from "jsonwebtoken";
-import AppError from "../../../../../../shared/errors/AppError";
-import { IUserToken, UserToken } from "../../../../domain/models/UserToken";
-import { AbstractUserTokenRepository } from "../../../../domain/repositories/AbstractUserTokenRepository";
+import AppError from "@shared/errors/AppError";
+import { IUserToken } from "@users/domain/models/UserToken";
+import { AbstractUserTokenRepository } from "@users/domain/repositories/AbstractUserTokenRepository";
 import { IUserTokenModel, UserTokenModel } from "../models/UserToken.schema";
-import authConfig from '../../../../../../adapters/auth/config'
+
 
 export class MongoDBUserTokenRepository implements AbstractUserTokenRepository {
 
@@ -17,7 +16,7 @@ export class MongoDBUserTokenRepository implements AbstractUserTokenRepository {
         const userToken = await this.userTokenModel.findOne({ token })
 
         if (!userToken) {
-            throw new AppError("Invalid token")
+            throw new AppError('Falha ao autenticar o usuário');
         }
 
         return userToken
@@ -25,5 +24,11 @@ export class MongoDBUserTokenRepository implements AbstractUserTokenRepository {
 
     async create(userToken: IUserToken): Promise<void> {       
         await this.userTokenModel.create(userToken)
+    }
+
+    async delete(username: string): Promise<void> {       
+        await this.userTokenModel.findOneAndDelete({
+            user: username
+        })
     }
 }
