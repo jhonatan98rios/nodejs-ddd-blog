@@ -2,7 +2,7 @@
   "name": "nodejs-ddd-blog",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/main.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
