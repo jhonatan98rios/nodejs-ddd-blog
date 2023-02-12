@@ -7,7 +7,8 @@ dotenv.config()
 
 const database = new Database({
     user: process.env.DATABASE_USER!,
-    password: process.env.DATABASE_PASS!
+    password: process.env.DATABASE_PASS!,
+    collection: process.env.DATABASE_NAME!,
 })
 
 const server = new Server()

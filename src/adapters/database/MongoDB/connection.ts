@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 interface DatabaseProps {
     user: string
     password: string
+    collection: string
 }
 
 export default class Database {
@@ -13,7 +14,8 @@ export default class Database {
         mongoose.set("strictQuery", false);
 
         try {
-            return await mongoose.connect(`mongodb+srv://${this.props.user}:${this.props.password}@clusterblog.0lqj7jz.mongodb.net/blog?retryWrites=true&w=majority`)
+            const connectionString = `mongodb+srv://${this.props.user}:${this.props.password}@clusterblog.0lqj7jz.mongodb.net/${this.props.collection}`
+            return await mongoose.connect(connectionString)
             
         } catch (err) {
             console.error('Database connection error:', err)
