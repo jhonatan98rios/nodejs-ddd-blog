@@ -33,13 +33,13 @@ export class UserController {
     public async update(request: Request, response: Response): Promise<Response> {
 
         const { username } = request.params
-        const { password, passwordConfirmation } = request.body
+        const { currentPassword, password, passwordConfirmation } = request.body
 
         const userRepository = new MongoDBUserRepository()
 
         const updateUserService = new UpdateUserService(userRepository)
         const updatedUser = await updateUserService.execute({
-            username, password, passwordConfirmation
+            username, currentPassword, password, passwordConfirmation
         })
 
         return response.json(updatedUser)
