@@ -14,4 +14,4 @@ const database = new Database({
 const server = new Server()
 
 server.connect({ database })
-server.listen(3333)
+server.listen(3000)
