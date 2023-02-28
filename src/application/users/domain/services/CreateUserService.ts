@@ -34,7 +34,8 @@ export class CreateUserService {
             mail,
             role: Roles.READ,
             password: hashedPassword,
-            consent
+            consent,
+            likedPosts: []
         })
 
         await this.userRepository.create(createdUser.props)

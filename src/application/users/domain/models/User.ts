@@ -10,6 +10,7 @@ export interface IUser {
     password: string
     role: Roles
     consent: boolean
+    likedPosts: string[]
 }
 
 export class User {
@@ -58,5 +59,14 @@ export class User {
 
     set consent(consent: boolean) {
         this.props.consent = consent
+    }
+
+    
+    get likedPosts(): string[] {
+        return this.props.likedPosts
+    }
+
+    set likedPosts(likedPosts: string[]) {
+        this.props.likedPosts = likedPosts
     }
 }
