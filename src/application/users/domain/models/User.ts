@@ -9,6 +9,7 @@ export interface IUser {
     mail: string
     password: string
     role: Roles
+    consent: boolean
 }
 
 export class User {
@@ -49,5 +50,13 @@ export class User {
 
     set role(role: Roles) {
         this.props.role = role
+    }
+
+    get consent(): boolean {
+        return this.props.consent
+    }
+
+    set consent(consent: boolean) {
+        this.props.consent = consent
     }
 }
