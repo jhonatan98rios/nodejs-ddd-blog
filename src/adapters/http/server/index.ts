@@ -47,7 +47,7 @@ export class Server {
 
     public listen(port: number) {
         this.app.listen(process.env.PORT || port, () => {
-            console.log(`Server started on port ${process.env.PORT || port}!`)
+            console.log(`Server started on port ${process.env.PORT || port}! 🏆`)
         });
     }
 }
