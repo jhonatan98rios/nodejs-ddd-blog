@@ -5,3 +5,8 @@ temp/
 token
 build/
 dist/
+README.md
+ECR-README.md
+ansible/hosts
+ansible/playbook-docker.retry
+ansible/teste.retry
