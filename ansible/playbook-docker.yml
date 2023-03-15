@@ -1,0 +1,67 @@
+---
+- name: Blog deploy
+  hosts: all
+  become: yes
+  tasks:
+  - name: Update all packages
+    yum:
+      name: "*"
+      state: latest
+      update_only: yes
+
+  - name: Ensure a list of yum packages are installed
+    yum:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes
+    vars:
+      packages:
+      - python-pip
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+      - amazon-linux-extras
+
+  - name: Add extras repository
+    shell: yum-config-manager --enable extras
+    
+  - name: Enable Some packages from amazon-linux-extras packages
+    shell: "amazon-linux-extras enable python3.8 ansible2 docker"
+
+  - name: Ensure a list of yum packages are installed
+    yum:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes
+    vars:
+      packages:
+      - python3.8
+      - ansible
+      - docker
+
+  - name: Installing python library for the Docker Remote API
+    pip:
+      name: docker-py
+
+  - name: Starting service docker
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Adding user to docker groups
+    become: yes
+    shell: usermod -aG docker ${USER}
+
+  - name: Repository clone
+    include_tasks: playbook-github.yml
+
+  - name: Building the image
+    become: yes
+    shell: docker build -t blog-node blog/
+
+  - name: Launch Container image to start the application
+    become: yes
+    shell: docker run -d -p 80:5000 --name blog --rm blog-node
+
+    

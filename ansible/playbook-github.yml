@@ -1,0 +1,22 @@
+---
+- name: Install git
+  become: yes
+  shell: yum install git -y
+
+- name: Check if the blog has already been cloned
+  stat:
+    path: /home/ec2-user/blog
+  register: register_name
+
+- name: Clone a github repository
+  git:
+    repo: https://github.com/jhonatan98rios/nodejs-ddd-blog.git
+    dest: /home/ec2-user/blog
+    clone: yes
+    update: yes
+  when: not register_name.stat.exists
+
+- name: Copy .env file from host to ec2
+  copy:
+    src: /mnt/c/Users/Desktop/Projects/nodejs-ddd-blog/.env
+    dest: /home/ec2-user/blog/.env
