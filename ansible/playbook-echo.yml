@@ -1,0 +1,9 @@
+---
+- name: Instalação do Docker
+  hosts: all
+  become: yes
+  tasks:
+  - name: Test ansible connection
+    shell: echo "test" > test.txt
+
+  
