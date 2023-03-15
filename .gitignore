@@ -5,3 +5,5 @@ temp/
 token
 build/
 dist/
+ECR-README.md
+benchmark.md

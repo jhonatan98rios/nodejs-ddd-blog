@@ -12,7 +12,7 @@ export class CreateUserService {
     constructor(private userRepository: AbstractUserRepository) {}
 
     async execute({
-        user, password, mail
+        user, password, mail, consent
     }: CreateUserDto): Promise<CreateUserResponse> {
 
         const userAlreadyExists = await this.userRepository.readOne(user)
@@ -34,6 +34,8 @@ export class CreateUserService {
             mail,
             role: Roles.READ,
             password: hashedPassword,
+            consent,
+            likedPosts: []
         })
 
         await this.userRepository.create(createdUser.props)

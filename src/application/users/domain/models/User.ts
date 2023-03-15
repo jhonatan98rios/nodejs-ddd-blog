@@ -9,6 +9,8 @@ export interface IUser {
     mail: string
     password: string
     role: Roles
+    consent: boolean
+    likedPosts: string[]
 }
 
 export class User {
@@ -49,5 +51,22 @@ export class User {
 
     set role(role: Roles) {
         this.props.role = role
+    }
+
+    get consent(): boolean {
+        return this.props.consent
+    }
+
+    set consent(consent: boolean) {
+        this.props.consent = consent
+    }
+
+    
+    get likedPosts(): string[] {
+        return this.props.likedPosts
+    }
+
+    set likedPosts(likedPosts: string[]) {
+        this.props.likedPosts = likedPosts
     }
 }

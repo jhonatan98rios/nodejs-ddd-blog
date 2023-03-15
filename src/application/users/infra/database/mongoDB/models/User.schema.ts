@@ -6,6 +6,8 @@ const UserSchema: Schema = new Schema<IUser, Model<IUser>>({
     mail: { type: String, required: true, unique: true },
     password: { type: String, required: true, unique: false },
     role: { type: String, required: true, unique: false },
+    consent: { type: Boolean, required: true, unique: false },
+    likedPosts: { type: [String], required: true, unique: false },
 })
 
 UserSchema.methods.toJSON = function(){
