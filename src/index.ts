@@ -14,4 +14,5 @@ const database = new Database({
 const server = new Server()
 
 server.connect({ database })
-server.listen(5000)
+server.httpsListen(5443)
+server.httpListen(8080)

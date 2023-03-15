@@ -20,3 +20,8 @@
   copy:
     src: /mnt/c/Users/Desktop/Projects/nodejs-ddd-blog/.env
     dest: /home/ec2-user/blog/.env
+
+- name: Copy certs files from host to ec2
+  copy:
+    src: /mnt/c/Users/Desktop/Projects/nodejs-ddd-blog/sslcert
+    dest: /home/ec2-user/blog/sslcert
