@@ -27,5 +27,5 @@ COPY --from=builder /usr/src/app/package.json /usr/src/app/
 
 WORKDIR /usr/src/app
 
-EXPOSE 5000
+EXPOSE 5443
 CMD ["dist/index.js"]
