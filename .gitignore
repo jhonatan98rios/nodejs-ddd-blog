@@ -1,6 +1,8 @@
 node_modules
+__node_modules
 .env
 .env.development
+docs/
 temp/
 token
 build/

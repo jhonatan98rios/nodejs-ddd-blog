@@ -1,0 +1,15 @@
+FROM node:16-alpine
+
+RUN mkdir -p /usr/app/
+WORKDIR /usr/app/
+
+COPY package*.json ./
+COPY tsconfig.json ./
+RUN npm install && npm cache clean --force
+
+COPY src ./src
+COPY .env ./
+
+EXPOSE 5000
+
+CMD ["npm", "run", "dev"]

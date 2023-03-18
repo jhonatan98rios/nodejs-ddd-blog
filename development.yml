@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+  development:
+    container_name: blog-development
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
+    volumes:
+      - ./:/usr/app/dev
+      - ignore:/usr/app/dev/node_modules/
+volumes:
+  ignore:

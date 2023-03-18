@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  prod:
+    container_name: prod
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:5000
