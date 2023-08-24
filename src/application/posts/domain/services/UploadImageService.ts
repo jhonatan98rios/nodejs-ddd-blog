@@ -32,7 +32,7 @@ export class UploadImageService {
 
         const imagePath = path.join(file.destination, file.filename)
         const imageBuffer = fs.readFileSync(imagePath)
-        const imageDestination = this.props.s3StorageProvider.destination
+        const imageDestination = this.props.s3StorageProvider.cdnPath
 
         await this.props.s3StorageProvider.imageUpload(
             file.filename,

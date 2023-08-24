@@ -9,12 +9,14 @@ dotenv.config()
 export default class S3StorageProvider implements AbstractCloudStorageProvider {
   public client: S3
   public destination: string
+  public cdnPath: string
 
   constructor() {
     this.client = new aws.S3({
       region: process.env.AWS_REGION,
     })
     this.destination = process.env.BUCKET_PATH as string
+    this.cdnPath = process.env.CDN_PATH as string
   }
 
   /**
